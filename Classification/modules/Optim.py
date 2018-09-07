@@ -1,3 +1,6 @@
+from __future__ import division
+from __future__ import print_function
+
 import torch.optim as optim
 from torch.nn.utils import clip_grad_norm
 

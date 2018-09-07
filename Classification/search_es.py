@@ -8,6 +8,10 @@ Policy:
     Making search_query based on the above policies.
 
 """
+from __future__ import division
+from __future__ import print_function
+
+
 from elasticsearch import Elasticsearch
 from elasticsearch.helpers import bulk
 from elasticsearch import exceptions
@@ -61,11 +65,13 @@ def _release_es_query_by_raw_query(raw_query):
 def _do_query_use_file_info(es, raw_query):
     raw_query, query, all_score = _release_es_query_by_raw_query(raw_query.strip())
     res = es.search(index='response', doc_type='rcqa', body=query, size=5)
+
     if (len(res['hits']['hits']) == 0):
         #print('len(res["hits"]["hits"]) == 0')
         #print("{0}".format(raw_query))
         return None 
     #print("query: {0}".format(raw_query))
+
     candidates = []
     for item in res['hits']['hits']:
         # print("{0}".format(raw_query))
@@ -84,8 +90,8 @@ def _do_query_use_file_info(es, raw_query):
         outputs.extend(coms)
     return outputs    
 
-def connet_es():
-    es = Elasticsearch(hosts=["127.0.0.1:9200"], timeout=5000)
+def connet_es(es_ip, es_port):
+    es = Elasticsearch(hosts=[es_ip + ":" + es_port], timeout=5000)
     return es 
 
 def _main():
@@ -94,7 +100,8 @@ def _main():
         return
     else:
         print('argv[1] = {0}'.format(sys.argv[1]))
-    es = Elasticsearch(hosts=["127.0.0.1:9200"], timeout=5000)
+    # es = Elasticsearch(hosts=["127.0.0.1:9200"], timeout=5000)
+    es = connet_es('127.0.0.1', '9200')
     with open(sys.argv[1]) as f_r:
         for item in f_r:
             try:

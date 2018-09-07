@@ -10,6 +10,10 @@
 
     Here this script is to unite the two strategies. 
 """
+from __future__ import division
+from __future__ import print_function
+
+
 import argparse 
 import os, sys
 import numpy as np 

@@ -2,8 +2,11 @@
 """
     Utils
 """
-from __future__ import unicode_literals, print_function, division
-import torch 
+from __future__ import division
+from __future__ import print_function
+from __future__ import unicode_literals
+
+import torch
 import numpy as np
 import torch.nn as nn 
 
@@ -72,3 +75,7 @@ def recall(probas, k, group_size):
     print(n_correct, len(probas), test_size)
     return n_correct*1.0 / (len(probas) / test_size)
 
+
+if __name__ == '__main__':
+    print (torch.__version__)
+    pass

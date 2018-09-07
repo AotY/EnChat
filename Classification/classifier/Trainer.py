@@ -1,4 +1,3 @@
-from __future__ import unicode_literals, print_function, division
 """
 This is the loadable seq2seq trainer library that is
 in charge of training details, loss compute, and statistics.
@@ -9,6 +8,10 @@ mechanism things here(i.e. what to do), and leave the strategy
 things to users(i.e. how to do it). Also see train.py(one of the
 users of this library) for the strategy things we do.
 """
+from __future__ import division
+from __future__ import print_function
+from __future__ import unicode_literals
+
 import time
 import sys
 import math

@@ -1,4 +1,7 @@
-import torch 
+from __future__ import division
+from __future__ import print_function
+
+import torch
 from torch.autograd import Variable
 import numpy as np 
 import io 
@@ -29,13 +32,15 @@ class DataSet(object):
         self.batch_size = batch_size
         self.with_label = with_label
         self.rank = rank 
+
         self.sample_num = len(self.examples)
+
         self.eos_id = eos_id
         self.sos_id = sos_id
 
     def __iter__(self):
         for ind in range(0, self.sample_num, self.batch_size):
-            batch = self.examples[ind:ind+self.batch_size]
+            batch = self.examples[ind:ind + self.batch_size]
             yield self.format(batch)
 
     def format(self, batch):
@@ -43,12 +48,13 @@ class DataSet(object):
         if self.rank:
             batch = sorted(batch, key=lambda d:d[0], reverse=True)
         t = list(zip(*batch))
+
         # with label
         if self.with_label:
             label = t[-1]
             t = t[:-1]
-        #
-        outputs = None 
+
+        outputs = None
         for i in range(0, len(t)-1, 2):
             txt_len, txt = (t[i], t[i+1])
             max_len = max(txt_len)

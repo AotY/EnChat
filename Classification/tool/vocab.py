@@ -5,7 +5,12 @@
         2), save and load vocabulary
         3), 
 """
-import os, sys, json
+from __future__ import division
+from __future__ import print_function
+
+import os
+import sys
+import json
 import logging
 import codecs
 import io
@@ -17,15 +22,18 @@ SOS = '<sos>'
 EOS = '<eos>'
 UNK = '<unk>'
 
+
 class Vocab(object):
     '''
     '''
+
     def __init__(self):
         self.init_vocab()
-    
+
     def init_vocab(self):
         self.word2idx = {}
         self.idx2word = {}
+
         self.word2idx['<pad>'] = 0
         self.word2idx['<sos>'] = 1
         self.word2idx['<eos>'] = 2
@@ -33,7 +41,6 @@ class Vocab(object):
 
     def build_vocab(self, corpus_path_list, min_count=None, max_size=None):
         '''
-
             corpus_path_list, the path of corpus list
                 each line includes multi-column sequence (separated by '\t')
                 Words in each sequence are separated by space ' '.
@@ -56,13 +63,16 @@ class Vocab(object):
                     for word in words:
                         word_count[word] = word_count.get(word, 0) + 1
                         # or try ... except ... 
+
         # cut with min_count
         if min_count is None:
             word_list = word_count.items()
         else:
             word_list = [(word, count) for word, count in word_count.items() if count > min_count]
+
         # sort word
-        ranked_word_list = sorted(word_list, key=lambda d:d[1], reverse=True)
+        ranked_word_list = sorted(word_list, key=lambda d: d[1], reverse=True)
+
         if max_size is not None:
             ranked_word_list = ranked_word_list[:max_size]
 
@@ -70,10 +80,12 @@ class Vocab(object):
         self.init_vocab()
         for word, _ in ranked_word_list:
             self.word2idx[word] = len(self.word2idx)
+
         logger.info("original vocab {}; pruned to {} with min_count {}".
-              format(len(word_count), len(self.word2idx), min_count))
+                    format(len(word_count), len(self.word2idx), min_count))
+
         self.idx2word = {v: k for k, v in self.word2idx.items()}
-    
+
     def load_vocab(self, vocab_path):
         if isinstance(vocab_path, dict):
             word2idx_t = vocab_path
@@ -88,10 +100,10 @@ class Vocab(object):
                 self.word2idx[k] = v
         self.idx2word = {v: k for k, v in self.word2idx.items()}
         logger.info("Load vocabulary from {}".format(vocab_path))
-    
+
     def save_vocab(self, vocab_path):
-        with open(vocab_path, "w") as fout, open(vocab_path+'.txt', 'w') as ft:
-            json.dump(self.word2idx, fout) 
+        with open(vocab_path, "w") as fout, open(vocab_path + '.txt', 'w') as ft:
+            json.dump(self.word2idx, fout)
             for k, v in self.word2idx.items():
                 ft.write('{}\t{}\n'.format(k, v))
         logger.info("Save vocabulary to {}".format(vocab_path))

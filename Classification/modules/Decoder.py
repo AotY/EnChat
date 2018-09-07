@@ -1,4 +1,6 @@
 from __future__ import division
+from __future__ import print_function
+
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
@@ -6,6 +8,7 @@ import torch.nn.functional as F
 from torch.autograd import Variable
 from utils import aeq, rnn_factory
 from GlobalAttention import GlobalAttention
+
 
 class DecoderState(object):
     """Interface for grouping together the current state of a recurrent
@@ -15,6 +18,7 @@ class DecoderState(object):
 
     Modules need to implement this to utilize beam search decoding.
     """
+
     def detach(self):
         for h in self._all:
             if h is not None:
@@ -26,6 +30,7 @@ class DecoderState(object):
             sent_states = e.view(a, beam_size, br // beam_size, d)[:, :, idx]
             sent_states.data.copy_(
                 sent_states.data.index_select(1, positions))
+
 
 class RNNDecoderState(DecoderState):
     """
@@ -42,6 +47,7 @@ class RNNDecoderState(DecoderState):
             beam_update,
             detach,
     """
+
     def __init__(self, hidden_size, rnnstate):
         """
         Args:
@@ -79,6 +85,7 @@ class RNNDecoderState(DecoderState):
                 for e in self._all]
         self.hidden = tuple(vars[:-1])
         self.input_feed = vars[-1]
+
 
 class DecoderBase(nn.Module):
     """
@@ -120,12 +127,13 @@ class DecoderBase(nn.Module):
        dropout (float) : dropout value for :obj:`nn.Dropout`
        embeddings (:obj:`Embeddings`): embedding module to use
     """
-    def __init__(self, rnn_type, 
+
+    def __init__(self, rnn_type,
                  bidirectional_encoder, num_layers,
                  hidden_size, attn_type=None,
                  dropout=0.0, embeddings=None):
         super(DecoderBase, self).__init__()
-        
+
         assert embeddings is not None
         # Basic attributes.
         self.decoder_type = 'rnn'
@@ -138,16 +146,16 @@ class DecoderBase(nn.Module):
 
         # Build the RNN.
         self.rnn = rnn_factory(rnn_type,
-                                   input_size=self._input_size,
-                                   hidden_size=hidden_size,
-                                   num_layers=num_layers,
-                                   dropout=dropout)
+                               input_size=self._input_size,
+                               hidden_size=hidden_size,
+                               num_layers=num_layers,
+                               dropout=dropout)
 
         # Set up the standard attention.
         if self.attn_type is not None:
-            self.attn = GlobalAttention(self.hidden_size, 
+            self.attn = GlobalAttention(self.hidden_size,
                                         attn_type=self.attn_type)
-        # 
+            #
 
     def init_decoder_state(self, src, memory_bank, encoder_final):
         def _fix_enc_hidden(h):
@@ -160,7 +168,7 @@ class DecoderBase(nn.Module):
         if isinstance(encoder_final, tuple):  # LSTM
             return RNNDecoderState(self.hidden_size,
                                    tuple([_fix_enc_hidden(enc_hid)
-                                         for enc_hid in encoder_final]))
+                                          for enc_hid in encoder_final]))
         else:  # GRU
             return RNNDecoderState(self.hidden_size,
                                    _fix_enc_hidden(encoder_final))
@@ -216,6 +224,7 @@ class DecoderBase(nn.Module):
 
         return decoder_outputs, state, attns
 
+
 class StdRNNDecoder(DecoderBase):
     """
     Standard fully batched RNN decoder with attention.
@@ -230,6 +239,7 @@ class StdRNNDecoder(DecoderBase):
 
     Implemented without input_feeding 
     """
+
     @property
     def _input_size(self):
         """
@@ -283,10 +293,11 @@ class StdRNNDecoder(DecoderBase):
             attns["std"] = p_attn
         else:
             decoder_outputs = rnn_output
-        
+
         # dropout
         decoder_outputs = self.dropout(decoder_outputs)
         return decoder_final, decoder_outputs, attns
+
 
 class InputFeedRNNDecoder(DecoderBase):
     """
@@ -314,6 +325,7 @@ class InputFeedRNNDecoder(DecoderBase):
           E --> H
           G --> H
     """
+
     @property
     def _input_size(self):
         """
@@ -342,7 +354,7 @@ class InputFeedRNNDecoder(DecoderBase):
             emb_t = emb_t.squeeze(0)
             decoder_input = torch.cat([emb_t, input_feed], 1)
             decoder_output, hidden, p_attn, input_feed = self._run_forward_one(
-            	decoder_input, memory_bank_t, hidden, memory_lengths=memory_lengths)
+                decoder_input, memory_bank_t, hidden, memory_lengths=memory_lengths)
             # input_feed = decoder_output
             decoder_outputs += [decoder_output]
             if p_attn is not None:
@@ -357,7 +369,7 @@ class InputFeedRNNDecoder(DecoderBase):
                 rnn_output,
                 memory_bank_t, memory_lengths=memory_lengths)
         else:
-        	decoder_output, p_attn = (rnn_output, None)
+            decoder_output, p_attn = (rnn_output, None)
 
         decoder_output = self.dropout(decoder_output)
         return decoder_output, hidden, p_attn, decoder_output

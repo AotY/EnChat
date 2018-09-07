@@ -10,23 +10,27 @@
 
     Here this script is to unite the two strategies. 
 """
-import argparse 
-import os, sys
-import numpy as np 
+from __future__ import division
+from __future__ import print_function
+
+import argparse
+import os
+import sys
+import numpy as np
 import random
-import logging 
+import logging
 import datetime
 
-import torch 
-import torch.nn.functional as F 
+import torch
+import torch.nn.functional as F
 from torch import cuda
-from torch.autograd import Variable 
+from torch.autograd import Variable
 
-import classifier.opts as opts 
-from classifier import ModelConstructor 
-from modules.utils import use_gpu 
+import classifier.opts as opts
+from classifier import ModelConstructor
+from modules.utils import use_gpu
 from tool.func_utils import line_to_id
-from tool.func_utils import sentence_pad  
+from tool.func_utils import sentence_pad
 
 from search_es import connet_es
 from search_es import _do_query_use_file_info
@@ -55,10 +59,11 @@ if opt.gpuid:
     cuda.set_device(opt.gpuid[0])
     if opt.seed > 0:
         torch.cuda.manual_seed(opt.seed)
-# Load vocab and confirm opt.vocab_size 
+
+# Load vocab and confirm opt.vocab_size
 vocab = torch.load(opt.vocab_path)
 opt.padding_idx = 0
-opt.numwords = len(vocab.word2idx) 
+opt.numwords = len(vocab.word2idx)
 
 ############################### utile func ####################################
 def format_query_candidates(query, candidates):
@@ -71,15 +76,16 @@ def format_query_candidates(query, candidates):
     for candidate in candidates:
         len_c, id_c = line_to_id(candidate, vocab, max_len=15, pre_trunc=False)
         pairs.append([len_q, id_query, len_c, id_c])
-    return pairs 
-    
+    return pairs
+
+
 def generate_batch(pairs):
     """
     """
     t = list(zip(*pairs))
-    outputs = None 
-    for i in range(0, len(t)-1,2):
-        txt_len, txt =(t[i], t[i+1])
+    outputs = None
+    for i in range(0, len(t) - 1, 2):
+        txt_len, txt = (t[i], t[i + 1])
         max_len = max(txt_len)
         txt = sentence_pad(txt, max_len=max_len)
         txt = Variable(torch.from_numpy(txt.T.astype(np.int64)))
@@ -88,32 +94,36 @@ def generate_batch(pairs):
             outputs = (txt, txt_len)
         else:
             outputs = outputs + (txt, txt_len)
-    return outputs 
+    return outputs
+
+
 def get_score(model, batch):
     """
     """
     model.eval()
-    q_src, q_src_len, r_src, r_src_len = batch 
-    if use_gpu: # add flag 
+    q_src, q_src_len, r_src, r_src_len = batch
+    if use_gpu:  # add flag
         q_src, q_src_len, r_src, r_src_len = (q_src.cuda(), q_src_len.cuda(),
-            r_src.cuda(), r_src_len.cuda())
+                                              r_src.cuda(), r_src_len.cuda())
     outputs, _ = model(q_src, q_src_len, r_src, r_src_len)
     print(outputs.size)
-    return F.sigmoid(outputs) 
-    
+    return F.sigmoid(outputs)
+
+
 ############################### Load model ####################################
 if opt.model_from:
-    print("Loading checkpoint from {}".format( opt.model_from))
+    print("Loading checkpoint from {}".format(opt.model_from))
     checkpoint = torch.load(opt.model_from,
-        map_location=lambda storage, loc:storage)
+                            map_location=lambda storage, loc: storage)
     model_opt = checkpoint['opt']
 
 print("building model ... ...")
 model = ModelConstructor.make_base_model(model_opt, use_gpu(opt), checkpoint)
 
-
 ############################ build connection with ES ########################
-es = connet_es()
+# es = connet_es('10.0.1.12', '9200')
+es = connet_es('127.0.0.1', '9200')
+
 print("connect to the chat server")
 ################################## Conversations ##############################
 print("**************** start conversation [push Cntl-D to exit] *************")
@@ -129,25 +139,27 @@ while True:
     # catch Exceptions
     if candidates is None or len(candidates) < 1:
         sys_output = (0., "Please input something else.")
-        continue 
+        continue
     else:
         sys_output = random.sample(candidates[:10], 1)[0]
     print(">> \t{}\t{} :S1".format(sys_output[1], sys_output[0]))
+
     ############################# Re-Rank using a CNN-based Ranker#############
-    candidate_replies = [c[1] for c in candidates] 
+    candidate_replies = [c[1] for c in candidates]
     pairs = format_query_candidates(input_str, candidate_replies)
-    batch = generate_batch(pairs) 
-    # score 
+
+    batch = generate_batch(pairs)
+
+    # score
     scores = get_score(model, batch)
     scores = scores.data.cpu().numpy()
+
     # ranking candidates according to the prediction of the model.
     rank = np.argsort(scores)
     rank = rank[::-1].tolist()
     #
     for idx, c_idx in enumerate(rank[:10]):
         run_logger.info("Ranker, c{}, {}, {}".format(idx, candidate_replies[c_idx], scores[c_idx]))
-    index = random.sample(rank[:10], 1)[0] 
+
+    index = random.sample(rank[:10], 1)[0]
     print(">> \t{}\t{} :S2".format(candidate_replies[index], scores[index]))
-
-
-    

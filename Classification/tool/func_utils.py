@@ -1,11 +1,14 @@
 #!/usr/bin/env python
+from __future__ import division
+from __future__ import print_function
+
 import io
-import numpy as np 
+import numpy as np
 
 ############################## transformation between words and ids #########
 id_to_words = lambda idxs, idx2word: [idx2word.get(idx) for idx in idxs]
 
-words_to_id = lambda words, vocab: [vocab.word2idx.get(word, vocab.unkid)]
+words_to_id = lambda words, vocab: [vocab.word2idx.get(word, vocab.unkid) for word in words]
 
 def line_to_id(line, vocab, max_len=None, pre_trunc=True):
     """Mapping words in line into index ids.
@@ -17,6 +20,7 @@ def line_to_id(line, vocab, max_len=None, pre_trunc=True):
                                     false, keeping the left part.
     """
     wids = [vocab.word2idx.get(w, vocab.unkid) for w in line.strip().split()]
+
     if max_len is None:
         return len(wids), wids
     else:
@@ -35,7 +39,7 @@ def check_unk(wids_list, unkid):
     unk_num = sum( [wids.count(unkid) for wids in wids_list] )
     return word_num, unk_num 
 
-def text2id(source_file, out_path, vocab):
+def text2id(source_file, out_path, vocab, logger):
     '''
         each line contains only one-column containing word list.
     '''
@@ -47,8 +51,12 @@ def text2id(source_file, out_path, vocab):
             out_line = ' '.join(map(str, wids))
             fout.write('{}\n'.format(out_line))
     # end fun
+
+
+
 ############################## Util Functions ###############################
 to_utf8 = lambda x: x.encode('utf-8') 
+
 def load_w2v_txt(fpath):
     """
     """

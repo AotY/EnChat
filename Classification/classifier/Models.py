@@ -3,6 +3,8 @@ This file is for several classification architectures,
 which are universal model for text classification tasks.
 """
 from __future__ import division
+from __future__ import print_function
+
 import torch
 import torch.nn as nn
 import torch.nn.functional as F

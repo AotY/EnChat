@@ -1,4 +1,6 @@
 from __future__ import division
+from __future__ import print_function
+
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
@@ -8,6 +10,7 @@ from torch.nn.utils.rnn import pack_padded_sequence as pack
 from torch.nn.utils.rnn import pad_packed_sequence as unpack
 
 from utils import aeq, rnn_factory
+
 
 class EncoderBase(nn.Module):
     """

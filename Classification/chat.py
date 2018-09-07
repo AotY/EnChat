@@ -1,5 +1,9 @@
 # -*- coding:utf-8 -*-
-import os, sys 
+from __future__ import division
+from __future__ import print_function
+
+import os
+import sys
 from search_es import _do_query_use_file_info, connet_es
 import random 
 

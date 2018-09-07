@@ -3,6 +3,10 @@
 Read data file, and then put them into ES.
 
 """
+from __future__ import division
+from __future__ import print_function
+
+
 from elasticsearch import Elasticsearch
 from elasticsearch.helpers import bulk
 from elasticsearch import exceptions
