@@ -4,7 +4,9 @@ from __future__ import print_function
 
 import argparse
 import numpy as np
-import os, sys, io
+import os
+import sys
+import io
 import torch
 
 from tool.vocab import Vocab

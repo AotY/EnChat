@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-python preprocess.py \
+python tool/preprocess.py \
     -train_corpus_path /home/Research/EnChat/askqa/train.post.txt /home/Research/EnChat/askqa/train.response.txt /home/Research/EnChat/askqa/train.label.txt \
     -valid_corpus_path /home/Research/EnChat/askqa/valid.post.txt /home/Research/EnChat/askqa/valid.response.txt /home/Research/EnChat/askqa/valid.label.txt \
     -valid_corpus_path /home/Research/EnChat/askqa/test.post.txt /home/Research/EnChat/askqa/test.response.txt //home/Research/EnChat/askqa/test.label.txt \
