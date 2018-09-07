@@ -34,6 +34,7 @@ from tool.func_utils import sentence_pad
 
 from search_es import connet_es
 from search_es import _do_query_use_file_info
+from embedding.embedding_score import get_embedding_score
 
 ##################### running logger #########################################
 runlog_name = "log/chatting.{}.log".format(datetime.date.today())
@@ -65,6 +66,9 @@ vocab = torch.load(opt.vocab_path)
 opt.padding_idx = 0
 opt.numwords = len(vocab.word2idx)
 
+# Load pre-trained embedding for vocab
+pre_trained_embedding = np.load(opt.pre_trained_vocab_embedding)
+
 ############################### utile func ####################################
 def format_query_candidates(query, candidates):
     """format the query and its candidates from ES,
@@ -72,6 +76,7 @@ def format_query_candidates(query, candidates):
     """
     # words to ids, lack of tokenization, 
     len_q, id_query = line_to_id(query, vocab, max_len=15)
+
     pairs = []
     for candidate in candidates:
         len_c, id_c = line_to_id(candidate, vocab, max_len=15, pre_trunc=False)
@@ -79,21 +84,28 @@ def format_query_candidates(query, candidates):
     return pairs
 
 
+# pairs: [[len_q, id_query, len_c, id_c]]
 def generate_batch(pairs):
     """
     """
     t = list(zip(*pairs))
     outputs = None
+
     for i in range(0, len(t) - 1, 2):
         txt_len, txt = (t[i], t[i + 1])
         max_len = max(txt_len)
+
         txt = sentence_pad(txt, max_len=max_len)
+
         txt = Variable(torch.from_numpy(txt.T.astype(np.int64)))
+
         txt_len = torch.LongTensor(txt_len).view(-1)
+
         if outputs is None:
             outputs = (txt, txt_len)
         else:
             outputs = outputs + (txt, txt_len)
+
     return outputs
 
 
@@ -106,7 +118,9 @@ def get_score(model, batch):
         q_src, q_src_len, r_src, r_src_len = (q_src.cuda(), q_src_len.cuda(),
                                               r_src.cuda(), r_src_len.cuda())
     outputs, _ = model(q_src, q_src_len, r_src, r_src_len)
+
     print(outputs.size)
+
     return F.sigmoid(outputs)
 
 
@@ -130,12 +144,15 @@ print("**************** start conversation [push Cntl-D to exit] *************")
 
 while True:
     input_str = raw_input("U: ")
-    # retrieve the ES 
+
+    # retrieve the ES
     candidates = _do_query_use_file_info(es, input_str)
+
     # logger
     run_logger.info("query: " + input_str)
     for idx, c in enumerate(candidates[:10]):
         run_logger.info("ES, c{}, {}, {}".format(idx, c[1], c[0]))
+
     # catch Exceptions
     if candidates is None or len(candidates) < 1:
         sys_output = (0., "Please input something else.")
@@ -151,15 +168,31 @@ while True:
     batch = generate_batch(pairs)
 
     # score
-    scores = get_score(model, batch)
-    scores = scores.data.cpu().numpy()
+    cnn_scores = get_score(model, batch)
+    cnn_scores = cnn_scores.data.cpu().numpy()
 
     # ranking candidates according to the prediction of the model.
-    rank = np.argsort(scores)
-    rank = rank[::-1].tolist()
-    #
-    for idx, c_idx in enumerate(rank[:10]):
-        run_logger.info("Ranker, c{}, {}, {}".format(idx, candidate_replies[c_idx], scores[c_idx]))
+    cnn_rank = np.argsort(cnn_scores)
+    cnn_rank = cnn_rank[::-1].tolist()
 
-    index = random.sample(rank[:10], 1)[0]
-    print(">> \t{}\t{} :S2".format(candidate_replies[index], scores[index]))
+    for idx, c_idx in enumerate(cnn_rank[:10]):
+        run_logger.info("CNN Ranker, c{}, {}, {}".format(idx, candidate_replies[c_idx], cnn_scores[c_idx]))
+
+    index = random.sample(cnn_rank[:10], 1)[0]
+    print(">> \t{}\t{} :S2".format(candidate_replies[index], cnn_scores[index]))
+
+    ############################# Re-Rank using a Word Embedding -based Ranker#############
+    # pairs [[len_q, id_query, len_c, id_c]]
+    # batch []
+    vector_query = pairs[0][1]
+    matrix_candidate = [pair[-1] for pair in pairs]
+    avg_embedding_score = get_embedding_score(pre_trained_embedding, vector_query, matrix_candidate, type='avg')
+    avg_embedding_rank = np.argsort(avg_embedding_score)
+    for idx, e_idx in enumerate(avg_embedding_rank[:10]):
+        run_logger.info("Avg Embedding Ranker, c{}, {}, {}".format(idx, candidate_replies[e_idx], cnn_scores[e_idx]))
+
+
+
+
+
+

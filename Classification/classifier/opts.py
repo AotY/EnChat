@@ -8,7 +8,6 @@ def model_opts(parser):
     These options are passed to the construction of the model.
     Be careful with these as they will be used during translation.
     """
-
     # Embedding Options
     group = parser.add_argument_group('Model-Embeddings')
     group.add_argument('-vocab_path', default="",
@@ -16,10 +15,20 @@ def model_opts(parser):
                        one word per line.""")
     group.add_argument('-word_vec_size', type=int, default=500,
                        help='Word embedding size for src.')
+
     group.add_argument('-share_embeddings', action='store_true',
                        help="""Share the word embeddings between encoder
                        and decoder. Need to use shared dictionary for this
                        option.""")
+
+    group.add_argument('-pre_trained_vocab_embedding',
+                       default='vocab_word2vec.300d.npy',
+                       help="""pre-trained vocab embedding, from word2vec, glove or gensim
+                       """)
+
+    group.add_argument('-save_data', required=True,
+                       help="Output file for the prepared data")
+
 
     # Encoder-Deocder Options
     group = parser.add_argument_group('Model- Encoder-Decoder')

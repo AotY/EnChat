@@ -28,8 +28,8 @@ def line_to_id(line, vocab, max_len=None, pre_trunc=True):
             wids = wids[-max_len:]
         else:
             wids = wids[:max_len]
+
         return len(wids), wids
-    # 
 
 def check_unk(wids_list, unkid):
     """Check whether words in one batch are mostly unknown,

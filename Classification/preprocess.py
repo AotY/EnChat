@@ -141,7 +141,7 @@ def build_vocab_embedding(vocab, opt):
 
         print("pre_trained_embedding.shape: {}".format(pre_trained_embedding.shape))
 
-        np.save(opt.vocab_path + '{}.{}d.npy'.format(opt.pre_word_vecs_type, opt.pre_word_vecs_dim) , pre_trained_embedding)
+        np.save(opt.save_data + '/vocab_{}.{}d.npy'.format(opt.pre_word_vecs_type, opt.pre_word_vecs_dim) , pre_trained_embedding)
 
 def build_save_dataset(corpus_type, opt):
     assert corpus_type in ['train', 'valid', 'test']
