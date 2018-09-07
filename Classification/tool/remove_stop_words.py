@@ -9,8 +9,8 @@ class StopWord:
 
     def __init__(self, file_path):
         self.file_path = file_path
-        self.load_stop_words()
         self.stop_words = []
+        self.load_stop_words()
 
     def load_stop_words(self):
         with io.open(self.file_path, 'r', encoding='utf-8') as fi:
