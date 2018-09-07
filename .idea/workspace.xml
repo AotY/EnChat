@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="5c5e708b-1b0e-4b48-903e-1ed5e46b5a4f" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Classification/pre.s2s.sh" afterPath="$PROJECT_DIR$/Classification/pre.s2s.sh" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Classification/preprocess.py" afterPath="$PROJECT_DIR$/Classification/preprocess.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -20,7 +20,7 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="preprocess.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="preprocess.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Classification/preprocess.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="-440">
@@ -44,7 +44,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="opts.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="opts.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Classification/classifier/opts.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="318">
@@ -62,8 +62,8 @@
       <file leaf-file-name="pre.s2s.sh" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Classification/pre.s2s.sh">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="23">
-              <caret line="1" column="12" lean-forward="false" selection-start-line="1" selection-start-column="12" selection-end-line="1" selection-end-column="12" />
+            <state relative-caret-position="322">
+              <caret line="14" column="28" lean-forward="false" selection-start-line="14" selection-start-column="5" selection-end-line="14" selection-end-column="28" />
               <folding />
             </state>
           </provider>
@@ -144,8 +144,8 @@
       <find>max_shard_size</find>
       <find>use_gpu</find>
       <find>save_data</find>
-      <find>cur_pos</find>
       <find>opts</find>
+      <find>cur_pos</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -185,8 +185,8 @@
         <option value="$PROJECT_DIR$/Classification/classifier/opts.py" />
         <option value="$PROJECT_DIR$/Classification/hybrid_retrieval.py" />
         <option value="$PROJECT_DIR$/Classification/embedding/embedding_score.py" />
-        <option value="$PROJECT_DIR$/Classification/pre.s2s.sh" />
         <option value="$PROJECT_DIR$/Classification/preprocess.py" />
+        <option value="$PROJECT_DIR$/Classification/pre.s2s.sh" />
       </list>
     </option>
   </component>
@@ -419,7 +419,7 @@
     <frame x="4" y="23" width="1436" height="877" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1728838" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.1728838" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -449,7 +449,7 @@
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.12079701" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32876712" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32876712" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1728838" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -830,19 +830,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Classification/classifier/opts.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="318">
-          <caret line="27" column="0" lean-forward="false" selection-start-line="27" selection-start-column="0" selection-end-line="27" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#31#0" expanded="true" />
-            <marker date="1536298999836" expanded="false" signature="14308:15513" ph="..." />
-            <marker date="1536298999836" expanded="false" signature="15516:16058" ph="..." />
-            <marker date="1536298999836" expanded="false" signature="16061:16542" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/log/chatting.2018-08-10.log">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="230">
@@ -889,20 +876,33 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Classification/pre.s2s.sh">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="23">
-          <caret line="1" column="12" lean-forward="false" selection-start-line="1" selection-start-column="12" selection-end-line="1" selection-end-column="12" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Classification/preprocess.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-440">
           <caret line="145" column="29" lean-forward="false" selection-start-line="145" selection-start-column="20" selection-end-line="145" selection-end-column="29" />
           <folding>
             <element signature="e#23#54#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Classification/pre.s2s.sh">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="322">
+          <caret line="14" column="28" lean-forward="false" selection-start-line="14" selection-start-column="5" selection-end-line="14" selection-end-column="28" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Classification/classifier/opts.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="318">
+          <caret line="27" column="0" lean-forward="false" selection-start-line="27" selection-start-column="0" selection-end-line="27" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#31#0" expanded="true" />
+            <marker date="1536298999836" expanded="false" signature="14308:15513" ph="..." />
+            <marker date="1536298999836" expanded="false" signature="15516:16058" ph="..." />
+            <marker date="1536298999836" expanded="false" signature="16061:16542" ph="..." />
           </folding>
         </state>
       </provider>
