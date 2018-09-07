@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-python hybrid_retrieval.py
+python hybrid_retrieval.py \
     -vocab_path data/reddit/askqa/vocab.pt \
     -word_vec_size 100 \
     -encoder_type cnn \
@@ -22,8 +22,7 @@ python hybrid_retrieval.py
     -seed 7 \
     -model_from model/askqa/askqa_acc_84.07_ppl_0.35_e3.pt \
     -save_data data/reddit/askqa \
-
-    -vocab_tfidf data/reddit/askqa/vocab_word2vec.300d.npy
+    -vocab_tfidf data/reddit/askqa/vocab_word2vec.300d.npy \
 
 
 /
