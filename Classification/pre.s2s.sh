@@ -13,7 +13,7 @@ python preprocess.py \
     -pre_word_vecs_type word2vec \
     -pre_word_vecs_dim 300 \
     -pre_word_vecs_file_type binary \
-#    -pre_trained_vocab_embedding_file data/reddit/askqa/vocab_word2vec.300d.npy \
+    -pre_trained_vocab_embedding_file data/reddit/askqa/vocab_word2vec.300d.npy \
 
 /
 
