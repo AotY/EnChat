@@ -3,6 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="5c5e708b-1b0e-4b48-903e-1ed5e46b5a4f" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Classification/classifier/opts.py" afterPath="$PROJECT_DIR$/Classification/classifier/opts.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Classification/demo.sh" afterPath="$PROJECT_DIR$/Classification/demo.sh" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -23,8 +24,8 @@
       <file leaf-file-name="hybrid_retrieval.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Classification/hybrid_retrieval.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="516">
-              <caret line="208" column="22" lean-forward="false" selection-start-line="205" selection-start-column="22" selection-end-line="208" selection-end-column="22" />
+            <state relative-caret-position="381">
+              <caret line="70" column="0" lean-forward="true" selection-start-line="70" selection-start-column="0" selection-end-line="70" selection-end-column="0" />
               <folding>
                 <element signature="e#502#533#0" expanded="true" />
               </folding>
@@ -35,8 +36,8 @@
       <file leaf-file-name="demo.sh" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Classification/demo.sh">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="23">
-              <caret line="1" column="28" lean-forward="false" selection-start-line="1" selection-start-column="28" selection-end-line="1" selection-end-column="28" />
+            <state relative-caret-position="574">
+              <caret line="25" column="74" lean-forward="true" selection-start-line="25" selection-start-column="33" selection-end-line="25" selection-end-column="74" />
               <folding />
             </state>
           </provider>
@@ -54,6 +55,21 @@
           </provider>
         </entry>
       </file>
+      <file leaf-file-name="opts.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Classification/classifier/opts.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="264">
+              <caret line="24" column="73" lean-forward="false" selection-start-line="24" selection-start-column="73" selection-end-line="24" selection-end-column="73" />
+              <folding>
+                <element signature="e#0#31#0" expanded="true" />
+                <marker date="1536329767845" expanded="false" signature="14847:16052" ph="..." />
+                <marker date="1536329767845" expanded="false" signature="16055:16597" ph="..." />
+                <marker date="1536329767845" expanded="false" signature="16600:17081" ph="..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="func_utils.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Classification/tool/func_utils.py">
           <provider selected="true" editor-type-id="text-editor">
@@ -61,21 +77,6 @@
               <caret line="103" column="16" lean-forward="false" selection-start-line="103" selection-start-column="16" selection-end-line="103" selection-end-column="16" />
               <folding>
                 <element signature="e#22#53#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="opts.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Classification/classifier/opts.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="287">
-              <caret line="62" column="0" lean-forward="false" selection-start-line="62" selection-start-column="0" selection-end-line="62" selection-end-column="0" />
-              <folding>
-                <element signature="e#0#31#0" expanded="true" />
-                <marker date="1536329066795" expanded="false" signature="14829:16034" ph="..." />
-                <marker date="1536329066795" expanded="false" signature="16037:16579" ph="..." />
-                <marker date="1536329066795" expanded="false" signature="16582:17063" ph="..." />
               </folding>
             </state>
           </provider>
@@ -171,11 +172,12 @@
       <find>build_idf</find>
       <find>build_vocab_embedding</find>
       <find>seed</find>
-      <find>vocab_path</find>
       <find>vocab_tfidf</find>
       <find>stop_word_file</find>
       <find>numwords</find>
       <find>save_data</find>
+      <find>vocab_path</find>
+      <find>pre_trained_vocab_embedding</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -215,10 +217,10 @@
         <option value="$PROJECT_DIR$/Classification/preprocess.py" />
         <option value="$PROJECT_DIR$/Classification/embedding/embedding_score.py" />
         <option value="$PROJECT_DIR$/Classification/pre.s2s.sh" />
-        <option value="$PROJECT_DIR$/Classification/classifier/opts.py" />
         <option value="$PROJECT_DIR$/Classification/tool/func_utils.py" />
         <option value="$PROJECT_DIR$/Classification/hybrid_retrieval.py" />
         <option value="$PROJECT_DIR$/Classification/demo.sh" />
+        <option value="$PROJECT_DIR$/Classification/classifier/opts.py" />
       </list>
     </option>
   </component>
@@ -299,7 +301,7 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="add_unversioned_files" value="true" />
-    <property name="SearchEverywhereHistoryKey" value="&#9;FILE&#9;file:///Users/LeonTao/PycharmProjects/EnChat/Classification/tool/tfidf.py&#10;stopwords_en&#9;FILE&#9;file:///Users/LeonTao/PycharmProjects/EnChat/Classification/stopwords_en.txt" />
+    <property name="SearchEverywhereHistoryKey" value="op&#9;FILE&#9;file:///Users/LeonTao/PycharmProjects/EnChat/Classification/classifier/opts.py&#10;stopwords_en&#9;FILE&#9;file:///Users/LeonTao/PycharmProjects/EnChat/Classification/stopwords_en.txt" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -430,7 +432,7 @@
     <frame x="4" y="23" width="1436" height="877" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1728838" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.1728838" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -438,7 +440,7 @@
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.12079701" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32876712" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32876712" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39975095" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Data View" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -460,7 +462,7 @@
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.12079701" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32876712" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32876712" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1728838" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -835,35 +837,12 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Classification/classifier/opts.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="287">
-          <caret line="62" column="0" lean-forward="false" selection-start-line="62" selection-start-column="0" selection-end-line="62" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#31#0" expanded="true" />
-            <marker date="1536329066795" expanded="false" signature="14829:16034" ph="..." />
-            <marker date="1536329066795" expanded="false" signature="16037:16579" ph="..." />
-            <marker date="1536329066795" expanded="false" signature="16582:17063" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Classification/tool/func_utils.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2360">
           <caret line="103" column="16" lean-forward="false" selection-start-line="103" selection-start-column="16" selection-end-line="103" selection-end-column="16" />
           <folding>
             <element signature="e#22#53#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Classification/embedding/load_embedding.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="693">
-          <caret line="104" column="16" lean-forward="false" selection-start-line="104" selection-start-column="11" selection-end-line="104" selection-end-column="16" />
-          <folding>
-            <element signature="e#100#131#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -880,18 +859,41 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Classification/hybrid_retrieval.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="516">
-          <caret line="208" column="22" lean-forward="false" selection-start-line="205" selection-start-column="22" selection-end-line="208" selection-end-column="22" />
+        <state relative-caret-position="381">
+          <caret line="70" column="0" lean-forward="true" selection-start-line="70" selection-start-column="0" selection-end-line="70" selection-end-column="0" />
           <folding>
             <element signature="e#502#533#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/Classification/embedding/load_embedding.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="693">
+          <caret line="104" column="16" lean-forward="false" selection-start-line="104" selection-start-column="11" selection-end-line="104" selection-end-column="16" />
+          <folding>
+            <element signature="e#100#131#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Classification/classifier/opts.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="264">
+          <caret line="24" column="73" lean-forward="false" selection-start-line="24" selection-start-column="73" selection-end-line="24" selection-end-column="73" />
+          <folding>
+            <element signature="e#0#31#0" expanded="true" />
+            <marker date="1536329767845" expanded="false" signature="14847:16052" ph="..." />
+            <marker date="1536329767845" expanded="false" signature="16055:16597" ph="..." />
+            <marker date="1536329767845" expanded="false" signature="16600:17081" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/Classification/demo.sh">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="23">
-          <caret line="1" column="28" lean-forward="false" selection-start-line="1" selection-start-column="28" selection-end-line="1" selection-end-column="28" />
+        <state relative-caret-position="574">
+          <caret line="25" column="74" lean-forward="true" selection-start-line="25" selection-start-column="33" selection-end-line="25" selection-end-column="74" />
           <folding />
         </state>
       </provider>

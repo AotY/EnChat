@@ -22,8 +22,8 @@ python hybrid_retrieval.py \
     -seed 7 \
     -model_from model/askqa/askqa_acc_84.07_ppl_0.35_e3.pt \
     -save_data data/reddit/askqa \
-    -vocab_tfidf data/reddit/askqa/vocab_word2vec.300d.npy \
-
+    -vocab_tfidf data/reddit/askqa/vocab.tfidf.pt \
+    -pre_trained_vocab_embedding data/reddit/askqa/vocab_word2vec.300d.npy \
 
 /
 

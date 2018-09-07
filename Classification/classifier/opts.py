@@ -22,7 +22,7 @@ def model_opts(parser):
                        option.""")
 
     group.add_argument('-pre_trained_vocab_embedding',
-                       default='vocab_word2vec.300d.npy',
+                       default='data/reddit/askqa/vocab_word2vec.300d.npy',
                        help="""pre-trained vocab embedding, from word2vec, glove or gensim
                        """)
 
