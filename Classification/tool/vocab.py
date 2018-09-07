@@ -15,6 +15,7 @@ import logging
 import codecs
 import io
 
+
 logger = logging.getLogger(__name__)
 
 PAD = '<pad>'
@@ -39,7 +40,7 @@ class Vocab(object):
         self.word2idx['<eos>'] = 2
         self.word2idx['<unk>'] = 3
 
-    def build_vocab(self, corpus_path_list, min_count=None, max_size=None):
+    def build_vocab(self, corpus_path_list, stop_word_obj, min_count=None, max_size=None):
         '''
             corpus_path_list, the path of corpus list
                 each line includes multi-column sequence (separated by '\t')
@@ -57,12 +58,14 @@ class Vocab(object):
             if not os.path.exists(corpus_path):
                 logger.info('The path {} doese not exist for building vocabulary'.format(corpus_path))
                 continue
+
             with io.open(corpus_path, "r", encoding='utf-8') as f:
                 for line in f:
-                    words = line.strip().replace('\t', ' ').split()
+                    # words = line.strip().replace('\t', ' ').split()
+                    words = stop_word_obj.remove_words(line.strip().replace('\t', ' '))
                     for word in words:
                         word_count[word] = word_count.get(word, 0) + 1
-                        # or try ... except ... 
+                        # or try ... except ...
 
         # cut with min_count
         if min_count is None:

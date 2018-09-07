@@ -14,6 +14,8 @@ from tool.datasetbase import DataSet
 from tool.preprocess_opt import preprocess_opts
 from tool.func_utils import line_to_id, load_w2v_txt
 from embedding.load_embedding import load_word2vec, load_glove
+from tool.tfidf import TFIDF
+from tool.remove_stop_words import StopWord
 
 def build_save_text_dataset_in_shards(vocab, corpus_list, opt, corpus_type):
 
@@ -72,11 +74,12 @@ def build_save_text_dataset_in_shards(vocab, corpus_list, opt, corpus_type):
 
 
 ##################################################################################
-def build_save_vocab(opt):
+def build_save_vocab(opt, stop_word_obj):
 
     if os.path.exists(opt.vocab_path):
         print("vocabulary has exists, {}".format(opt.vocab_path))
-        return
+        vocab = torch.load(opt.vocab_path)
+        return vocab
 
     # build vocabulary
     print ('Building Vocabulary ... ...')
@@ -89,8 +92,10 @@ def build_save_vocab(opt):
     vocab = Vocab()
 
     vocab.build_vocab(corpus_list,
+                      stop_word_obj,
                       min_count=opt.words_min_frequency,
-                      max_size=opt.vocab_size)
+                      max_size=opt.vocab_size,
+                      )
 
     torch.save(vocab, opt.vocab_path)
 
@@ -127,6 +132,10 @@ def build_save_vocab(opt):
 
 def build_vocab_embedding(vocab, opt):
     # format pretrain word2vec
+    if os.path.exists(opt.pre_trained_vocab_embedding_file):
+        print("pre-trained vocab embedding has exists, {}".format(opt.vocab_path))
+        return
+
     vocab_size = max(opt.vocab_size, len(vocab.word2idx))
     print("vocab_size: {}".format(vocab_size))
     if opt.pre_word_vecs_path is not None and os.path.exists(opt.pre_word_vecs_path):
@@ -135,7 +144,7 @@ def build_vocab_embedding(vocab, opt):
         elif opt.pre_word_vecs_type == 'glove':
             not_in_pretrained, pre_trained_embedding = load_glove(vocab, vocab_size, opt.pre_word_vecs_path, opt.pre_word_vecs_dim, opt.pre_word_vecs_file_type)
 
-        print("Dim: {}, Vocab_size:{}, Number of not in {}: {}".format(
+        print("Dim: {}, Vocab_size:{}, Numbers of not in {}: {}".format(
                                                 opt.pre_word_vecs_dim,
                                                 opt.vocab_size,
                                                 opt.pre_word_vecs_type,
@@ -143,9 +152,13 @@ def build_vocab_embedding(vocab, opt):
 
         print("pre_trained_embedding.shape: {}".format(pre_trained_embedding.shape))
 
-        np.save(opt.save_data + '/vocab_{}.{}d.npy'.format(opt.pre_word_vecs_type, opt.pre_word_vecs_dim) , pre_trained_embedding)
+        if opt.pre_trained_vocab_embedding_file == None:
+            save_file = opt.save_data + '/vocab_{}.{}d.npy'.format(opt.pre_word_vecs_type, opt.pre_word_vecs_dim)
+        else:
+            save_file = opt.pre_trained_vocab_embedding_file
+        np.save(save_file, pre_trained_embedding)
 
-def build_save_dataset(corpus_type, opt):
+def build_save_dataset(vocab, corpus_type, opt):
     assert corpus_type in ['train', 'valid', 'test']
 
     if corpus_type == 'train':
@@ -158,7 +171,7 @@ def build_save_dataset(corpus_type, opt):
         corpus_list = opt.valid_corpus_path
 
     # Currently we only do preprocess sharding for corpus: data_type=='text'.
-    return build_save_text_dataset_in_shards(corpus_list, opt, corpus_type)
+    return build_save_text_dataset_in_shards(vocab, corpus_list, opt, corpus_type)
 
 
 def main():
@@ -168,21 +181,29 @@ def main():
     preprocess_opts(parser)
     opt = parser.parse_args()
 
+    stop_word_obj = StopWord(opt.stop_word_file)
+
     # 
     print("Building & saving vocabulary...")
-    vocab = build_save_vocab(opt)
+    vocab = build_save_vocab(opt, stop_word_obj)
 
     print("Load pre-trained word embedding, and build embedding for vocab")
     build_vocab_embedding(vocab, opt)
 
+    print("build tf-idf for word")
+    tfidf = TFIDF()
+    tfidf.build_idf(stop_word_obj, opt)
+    torch.save(tfidf, opt.save_data + '/vocab.tfidf.pt')
+
     print("Building & saving training data...")
-    build_save_dataset('train', opt)
+    build_save_dataset(vocab, 'train', opt)
 
     print("Building & saving validation data...")
-    build_save_dataset('valid', opt)
+    build_save_dataset(vocab, 'valid', opt)
 
     print("Building & saving test data...")
-    build_save_dataset('test', opt)
+    build_save_dataset(vocab, 'test', opt)
+
 
 
 if __name__ == "__main__":

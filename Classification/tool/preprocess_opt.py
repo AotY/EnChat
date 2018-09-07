@@ -47,6 +47,7 @@ def preprocess_opts(parser):
     group.add_argument('-share_vocab', action='store_true',
                        help="Share source and target vocabulary")
 
+
     # Truncation options, for text corpus
     group = parser.add_argument_group('Pruning')
     group.add_argument('-seq_length', type=int, default=50,
@@ -56,6 +57,7 @@ def preprocess_opts(parser):
 
     group.add_argument('-lower', action='store_true', help='lowercase data')
 
+
     # Data processing options
     group = parser.add_argument_group('Random')
 
@@ -64,6 +66,11 @@ def preprocess_opts(parser):
 
     group.add_argument('-seed', type=int, default=3435,
                        help="Random seed")
+
+    group.add_argument('-stop_word_file',
+                       default='./stopwords_en.txt',
+                       help="For loding stop_words")
+
 
     # from previous vocab
     group.add_argument('-pre_word_vecs_path',
@@ -85,4 +92,13 @@ def preprocess_opts(parser):
     group.add_argument('-pre_word_vecs_file_type',
                        default='binary',
                        help="""pre-trained word embedding file type, binary or txt. 
+                           """)
+
+    group.add_argument('-pre_trained_vocab_embedding_file',
+                       help="""pre trained vocab embedding file 
+                           """)
+
+    # TFIDF
+    group.add_argument('-vocab_tfidf',
+                       help="""This object saves the idf value of all vocab words. 
                            """)
