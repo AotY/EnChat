@@ -26,8 +26,23 @@ def model_opts(parser):
                        help="""pre-trained vocab embedding, from word2vec, glove or gensim
                        """)
 
+    group.add_argument('-embedding_ranker_type',
+                       default='avg',
+                       help="""Embedding rankder type, eg avg, tfidf weight, extreme or EMD
+                       """)
+
+    group.add_argument('-vocab_tfidf',
+                       help="""This object saves the idf value of all vocab words. 
+                           """)
+
+
     group.add_argument('-save_data', required=True,
                        help="Output file for the prepared data")
+
+    group.add_argument('-stop_word_file',
+                       default='./stopwords_en.txt',
+                       help="For loding stop_words")
+    #
 
 
     # Encoder-Deocder Options
@@ -45,6 +60,7 @@ def model_opts(parser):
 
     group.add_argument('-numwords', type=int, default=None,
                        help='Number of words in embedding of the encoder')
+
     group.add_argument('-padding_idx', type=int, default=None,
                        help='Number of words in embedding of the encoder')
 

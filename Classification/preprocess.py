@@ -140,15 +140,15 @@ def build_vocab_embedding(vocab, opt):
     print("vocab_size: {}".format(vocab_size))
     if opt.pre_word_vecs_path is not None and os.path.exists(opt.pre_word_vecs_path):
         if opt.pre_word_vecs_type == 'word2vec':
-            not_in_pretrained, pre_trained_embedding = load_word2vec(vocab, vocab_size, opt.pre_word_vecs_path, opt.pre_word_vecs_dim, opt.pre_word_vecs_file_type)
+            in_pretrained_count, pre_trained_embedding = load_word2vec(vocab, vocab_size, opt.pre_word_vecs_path, opt.pre_word_vecs_dim, opt.pre_word_vecs_file_type)
         elif opt.pre_word_vecs_type == 'glove':
-            not_in_pretrained, pre_trained_embedding = load_glove(vocab, vocab_size, opt.pre_word_vecs_path, opt.pre_word_vecs_dim, opt.pre_word_vecs_file_type)
+            in_pretrained_count, pre_trained_embedding = load_glove(vocab, vocab_size, opt.pre_word_vecs_path, opt.pre_word_vecs_dim, opt.pre_word_vecs_file_type)
 
         print("Dim: {}, Vocab_size:{}, Numbers of not in {}: {}".format(
                                                 opt.pre_word_vecs_dim,
                                                 opt.vocab_size,
                                                 opt.pre_word_vecs_type,
-                                                not_in_pretrained))
+                                                vocab_size - in_pretrained_count))
 
         print("pre_trained_embedding.shape: {}".format(pre_trained_embedding.shape))
 

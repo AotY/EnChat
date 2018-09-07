@@ -30,7 +30,7 @@ def load_word2vec(vocab, vocab_size, vec_file, embedding_dim, pre_word_vecs_file
     else:
         model = 'r'
 
-    not_bf = BloomFilter(capacity=3000000, error_rate=0.001)
+    in_bf = BloomFilter(capacity=3000000, error_rate=0.001)
 
     with open(vec_file, model) as f:
         header = f.readline()
@@ -53,12 +53,12 @@ def load_word2vec(vocab, vocab_size, vec_file, embedding_dim, pre_word_vecs_file
             idx = vocab.word2idx.get(word, vocab.unkid)
 
             if idx != vocab.unkid:
+                in_bf.add(word)
                 pre_trained_embedding[idx] = np.fromstring(f.read(binary_len), dtype='float32')
             else:
-                not_bf.add(word)
                 f.read(binary_len)
 
-    return not_bf.count, pre_trained_embedding
+    return in_bf.count, pre_trained_embedding
 
 
 '''
@@ -74,7 +74,7 @@ def load_glove(vocab, vocab_size, glove_file, glove_vocab_size, embedding_dim, p
     # load any vectors from the word2vec
     print("Load glove file {}\n".format(glove_file))
 
-    not_bf = BloomFilter(capacity=3000000, error_rate=0.001)
+    in_bf = BloomFilter(capacity=3000000, error_rate=0.001)
 
     if pre_word_vecs_file_type == 'binary':
         model = 'rb'
@@ -97,12 +97,12 @@ def load_glove(vocab, vocab_size, glove_file, glove_vocab_size, embedding_dim, p
             idx = vocab.word2idx.get(word, vocab.unkid)
 
             if idx != vocab.unkid:
+                in_bf.add(word)
                 pre_trained_embedding[idx] = np.fromstring(f.read(binary_len), dtype='float32')
             else:
-                not_bf.add(word)
                 f.read(binary_len)
 
-    return not_bf.count, pre_trained_embedding
+    return in_bf.count, pre_trained_embedding
 
 
 def save_reddit_embedding(embedding, save_file):

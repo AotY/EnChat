@@ -34,7 +34,10 @@ from tool.func_utils import sentence_pad
 
 from search_es import connet_es
 from search_es import _do_query_use_file_info
-from embedding.embedding_score import get_embedding_score
+from embedding.embedding_score import get_avg_embedding_score, get_tfidf_embedding_score
+from tool.tfidf import TFIDF
+from tool.remove_stop_words import StopWord
+
 
 ##################### running logger #########################################
 runlog_name = "log/chatting.{}.log".format(datetime.date.today())
@@ -69,22 +72,28 @@ opt.numwords = len(vocab.word2idx)
 # Load pre-trained embedding for vocab
 pre_trained_embedding = np.load(opt.pre_trained_vocab_embedding)
 
+# Load TFIDF object, for computing word's tfidf value.
+tfidf = torch.load(opt.vocab_tfidf)
+
+# Load stop_words
+stop_word_obj = StopWord(opt.stop_word_file)
+
 ############################### utile func ####################################
 def format_query_candidates(query, candidates):
     """format the query and its candidates from ES,
         mapping text to ids, 
     """
     # words to ids, lack of tokenization, 
-    len_q, id_query = line_to_id(query, vocab, max_len=15)
+    len_query, id_query = line_to_id(query, vocab, max_len=15)
 
     pairs = []
     for candidate in candidates:
-        len_c, id_c = line_to_id(candidate, vocab, max_len=15, pre_trunc=False)
-        pairs.append([len_q, id_query, len_c, id_c])
+        len_candidate, id_candidate = line_to_id(candidate, vocab, max_len=15, pre_trunc=False)
+        pairs.append([len_query, id_query, len_candidate, id_candidate])
     return pairs
 
 
-# pairs: [[len_q, id_query, len_c, id_c]]
+# pairs: [[len_query, id_query, len_candidate, id_candidate], [len_query, id_query, len_candidate, id_candidate]]
 def generate_batch(pairs):
     """
     """
@@ -93,6 +102,7 @@ def generate_batch(pairs):
 
     for i in range(0, len(t) - 1, 2):
         txt_len, txt = (t[i], t[i + 1])
+
         max_len = max(txt_len)
 
         txt = sentence_pad(txt, max_len=max_len)
@@ -117,6 +127,7 @@ def get_score(model, batch):
     if use_gpu:  # add flag
         q_src, q_src_len, r_src, r_src_len = (q_src.cuda(), q_src_len.cuda(),
                                               r_src.cuda(), r_src_len.cuda())
+
     outputs, _ = model(q_src, q_src_len, r_src, r_src_len)
 
     print(outputs.size)
@@ -186,12 +197,16 @@ while True:
     # batch []
     vector_query = pairs[0][1]
     matrix_candidate = [pair[-1] for pair in pairs]
-    avg_embedding_score = get_embedding_score(pre_trained_embedding, vector_query, matrix_candidate, type='avg')
+    avg_embedding_score = get_avg_embedding_score(pre_trained_embedding, vector_query, matrix_candidate) # opt.embedding_ranker_type
     avg_embedding_rank = np.argsort(avg_embedding_score)
     for idx, e_idx in enumerate(avg_embedding_rank[:10]):
-        run_logger.info("Avg Embedding Ranker, c{}, {}, {}".format(idx, candidate_replies[e_idx], cnn_scores[e_idx]))
+        run_logger.info("Avg Embedding Ranker, c{}, {}, {}".format(idx, candidate_replies[e_idx], avg_embedding_score[e_idx]))
 
-
+    ############################# Re-Rank using a Word Embedding-based with TFIDF weight Ranker#############
+    # tfidf_embedding_score = get_tfidf_embedding_score(pre_trained_embedding, vector_query, matrix_candidate, tfidf, stop_word_obj, input_str, candidate_replies)
+    # tfidf_embedding_rank = np.argsort(tfidf_embedding_score)
+    # for idx, e_idx in enumerate(tfidf_embedding_rank[:10]):
+    #     run_logger.info("TFIDF Embedding Ranker, c{}, {}, {}".format(idx, candidate_replies[e_idx], tfidf_embedding_score[e_idx]))
 
 
 
