@@ -62,6 +62,6 @@ def get_avg_embedding_score(pre_trained_embedding, vector_query, matrix_candidat
     )
 
     cos = torch.nn.CosineSimilarity(dim=1, eps=1e-6)
-    return cos(avg_vector_query, avg_matrix_candidate)
+    return cos(torch.FloatTensor(avg_vector_query), torch.FloatTensor(avg_matrix_candidate))
 
 
