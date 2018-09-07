@@ -2,37 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="5c5e708b-1b0e-4b48-903e-1ed5e46b5a4f" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/vcs.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Classification/__init__.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Classification/embedding/__init__.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Classification/embedding/load_embedding.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Classification/embedding/train_embedding.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Classification/tool/paths.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Classification/chat.py" afterPath="$PROJECT_DIR$/Classification/chat.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Classification/classifier/ModelConstructor.py" afterPath="$PROJECT_DIR$/Classification/classifier/ModelConstructor.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Classification/classifier/Models.py" afterPath="$PROJECT_DIR$/Classification/classifier/Models.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Classification/classifier/Trainer.py" afterPath="$PROJECT_DIR$/Classification/classifier/Trainer.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Classification/classifier/opts.py" afterPath="$PROJECT_DIR$/Classification/classifier/opts.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Classification/demo.sh" afterPath="$PROJECT_DIR$/Classification/demo.sh" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Classification/hybrid_retrieval.py" afterPath="$PROJECT_DIR$/Classification/hybrid_retrieval.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Classification/insert_es.py" afterPath="$PROJECT_DIR$/Classification/insert_es.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Classification/modules/Decoder.py" afterPath="$PROJECT_DIR$/Classification/modules/Decoder.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Classification/modules/Embeddings.py" afterPath="$PROJECT_DIR$/Classification/modules/Embeddings.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Classification/modules/Encoder.py" afterPath="$PROJECT_DIR$/Classification/modules/Encoder.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Classification/modules/GlobalAttention.py" afterPath="$PROJECT_DIR$/Classification/modules/GlobalAttention.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Classification/modules/Optim.py" afterPath="$PROJECT_DIR$/Classification/modules/Optim.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Classification/modules/utils.py" afterPath="$PROJECT_DIR$/Classification/modules/utils.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Classification/old_hybrid_retrieval.py" afterPath="$PROJECT_DIR$/Classification/old_hybrid_retrieval.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Classification/pre.s2s.sh" afterPath="$PROJECT_DIR$/Classification/pre.s2s.sh" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Classification/pre_douban_s2s.sh" afterPath="$PROJECT_DIR$/Classification/pre_douban_s2s.sh" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Classification/preprocess.py" afterPath="$PROJECT_DIR$/Classification/preprocess.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Classification/search_es.py" afterPath="$PROJECT_DIR$/Classification/search_es.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Classification/test_cls_dual.py" afterPath="$PROJECT_DIR$/Classification/test_cls_dual.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Classification/tool/datasetbase.py" afterPath="$PROJECT_DIR$/Classification/tool/datasetbase.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Classification/tool/func_utils.py" afterPath="$PROJECT_DIR$/Classification/tool/func_utils.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Classification/tool/preprocess_opt.py" afterPath="$PROJECT_DIR$/Classification/tool/preprocess_opt.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Classification/tool/vocab.py" afterPath="$PROJECT_DIR$/Classification/tool/vocab.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Classification/train_cls.sh" afterPath="$PROJECT_DIR$/Classification/train_cls.sh" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Classification/train_cls_dual.py" afterPath="$PROJECT_DIR$/Classification/train_cls_dual.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -98,21 +70,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name=".gitignore" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/.gitignore">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="92">
-              <caret line="4" column="4" lean-forward="true" selection-start-line="4" selection-start-column="4" selection-end-line="4" selection-end-column="4" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="pre_douban_s2s.sh" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Classification/pre_douban_s2s.sh">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="322">
-              <caret line="14" column="33" lean-forward="true" selection-start-line="14" selection-start-column="33" selection-end-line="14" selection-end-column="33" />
+            <state relative-caret-position="253">
+              <caret line="11" column="1" lean-forward="false" selection-start-line="11" selection-start-column="1" selection-end-line="11" selection-end-column="1" />
               <folding />
             </state>
           </provider>
@@ -121,14 +83,14 @@
       <file leaf-file-name="pre.s2s.sh" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Classification/pre.s2s.sh">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="46">
-              <caret line="2" column="0" lean-forward="false" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
+            <state relative-caret-position="0">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="load_embedding.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="load_embedding.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Classification/embedding/load_embedding.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="262">
@@ -226,6 +188,8 @@
         <option value="$PROJECT_DIR$/Classification/embedding/load_embedding.py" />
         <option value="$PROJECT_DIR$/Classification/preprocess.py" />
         <option value="$PROJECT_DIR$/Classification/tool/datasetbase.py" />
+        <option value="$PROJECT_DIR$/.gitignore" />
+        <option value="$PROJECT_DIR$/Classification/pre.s2s.sh" />
         <option value="$PROJECT_DIR$/Classification/pre_douban_s2s.sh" />
       </list>
     </option>
@@ -298,6 +262,11 @@
               <item name="EnChat" type="462c0819:PsiDirectoryNode" />
               <item name="Classification" type="462c0819:PsiDirectoryNode" />
               <item name="tool" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="EnChat" type="b2602c69:ProjectViewProjectNode" />
+              <item name="EnChat" type="462c0819:PsiDirectoryNode" />
+              <item name="log" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="EnChat" type="b2602c69:ProjectViewProjectNode" />
@@ -442,7 +411,7 @@
     <frame x="4" y="23" width="1436" height="877" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1728838" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.1728838" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -450,7 +419,7 @@
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.12079701" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32876712" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32876712" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39975095" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Data View" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -471,8 +440,8 @@
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.12079701" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.12079701" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32876712" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1728838" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -791,16 +760,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Classification/embedding/load_embedding.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="262">
-          <caret line="68" column="8" lean-forward="false" selection-start-line="68" selection-start-column="8" selection-end-line="68" selection-end-column="8" />
-          <folding>
-            <element signature="e#100#131#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Classification/test_cls_dual.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-404">
@@ -830,14 +789,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Classification/pre.s2s.sh">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="46">
-          <caret line="2" column="0" lean-forward="false" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Classification/tool/vocab.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="943">
@@ -848,10 +799,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Classification/pre_douban_s2s.sh">
+    <entry file="file://$PROJECT_DIR$/.gitignore">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="322">
-          <caret line="14" column="33" lean-forward="true" selection-start-line="14" selection-start-column="33" selection-end-line="14" selection-end-column="33" />
+        <state relative-caret-position="414">
+          <caret line="18" column="6" lean-forward="true" selection-start-line="18" selection-start-column="6" selection-end-line="18" selection-end-column="6" />
           <folding />
         </state>
       </provider>
@@ -866,11 +817,29 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/.gitignore">
+    <entry file="file://$PROJECT_DIR$/Classification/pre_douban_s2s.sh">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="92">
-          <caret line="4" column="4" lean-forward="true" selection-start-line="4" selection-start-column="4" selection-end-line="4" selection-end-column="4" />
+        <state relative-caret-position="253">
+          <caret line="11" column="1" lean-forward="false" selection-start-line="11" selection-start-column="1" selection-end-line="11" selection-end-column="1" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Classification/pre.s2s.sh">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Classification/embedding/load_embedding.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="262">
+          <caret line="68" column="8" lean-forward="false" selection-start-line="68" selection-start-column="8" selection-end-line="68" selection-end-column="8" />
+          <folding>
+            <element signature="e#100#131#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
