@@ -51,17 +51,18 @@ def get_tfidf_embedding_score(vocab, pre_trained_embedding, vector_query, matrix
 def get_avg_embedding_score(pre_trained_embedding, vector_query, matrix_candidate):
     avg_vector_query = np.mean(
         [pre_trained_embedding[id_query] for id_query in vector_query],
-        axis=1
+        axis=0
     ).reshape(1, -1)
 
     avg_matrix_candidate = np.array([
-        np.mean([
-            pre_trained_embedding[id_candidate] for id_candidate in vector_candidate], axis=1
-        )
-        for vector_candidate in matrix_candidate]
-    )
+        np.mean([pre_trained_embedding[id_candidate] for id_candidate in vector_candidate], axis=0)
+        for vector_candidate in matrix_candidate
+    ])
+
+    avg_vector_query = torch.Tensor(avg_vector_query)
+    avg_matrix_candidate = torch.Tensor(avg_matrix_candidate)
 
     cos = torch.nn.CosineSimilarity(dim=1, eps=1e-6)
-    return cos(torch.FloatTensor(avg_vector_query), torch.FloatTensor(avg_matrix_candidate))
+    return cos(avg_vector_query, avg_matrix_candidate)
 
 
