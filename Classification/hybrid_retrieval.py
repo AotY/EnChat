@@ -133,6 +133,7 @@ def get_score(model, batch):
     print(outputs.size)
 
     return F.sigmoid(outputs)
+    # return torch.
 
 
 ############################### Load model ####################################
@@ -201,6 +202,8 @@ while True:
     avg_embedding_rank = np.argsort(avg_embedding_score)
     for idx, e_idx in enumerate(avg_embedding_rank[:10]):
         run_logger.info("Avg Embedding Ranker, c{}, {}, {}".format(idx, candidate_replies[e_idx], avg_embedding_score[e_idx]))
+    index = random.sample(avg_embedding_rank[:10], 1)[0]
+    print(">> \t{}\t{} :S3".format(candidate_replies[index], cnn_scores[index]))
 
     ############################# Re-Rank using a Word Embedding-based with TFIDF weight Ranker#############
     # tfidf_embedding_score = get_tfidf_embedding_score(pre_trained_embedding, vector_query, matrix_candidate, tfidf, stop_word_obj, input_str, candidate_replies)

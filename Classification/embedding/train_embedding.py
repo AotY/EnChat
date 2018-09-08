@@ -8,48 +8,94 @@ data from reddit
 from __future__ import division
 from __future__ import print_function
 
+import io
+import argparse
 import logging
-logging.basicConfig(format='%(asctime)s : %(levelname)s : %(message)s', level=logging.INFO)
+import multiprocessing
+import os
+import sys
+from gensim.models.word2vec import LineSentence
+from gensim.models.word2vec import Word2Vec
+from train_embedding_opt import train_embedding_opt
 
-import gensim
-from gensim.models import Word2Vec
 
-# define training data
-sentences = [['this', 'is', 'the', 'first', 'sentence', 'for', 'word2vec'],
-             ['this', 'is', 'the', 'second', 'sentence'],
-             ['yet', 'another', 'sentence'],
-             ['one', 'more', 'sentence'],
-             ['and', 'the', 'final', 'sentence']]
+def load_source(corpus_path_list, logger):
+    source = []
+    for corpus_path in corpus_path_list:
+        # check there exists the corpus_path or not.
+        if not os.path.exists(corpus_path):
+            logger.info('The path {} doese not exist for building vocabulary'.format(corpus_path))
+            continue
 
-documents = sentences
-# build vocabulary and train model
-model = gensim.models.Word2Vec(
-    documents,
-    size=300,
-    window=10,
-    min_count=5,
-    sample=1e-3,
-    negative=5,
-    cbow_mean=1,
-    hs=0,
-    workers=10
-)
+        with io.open(corpus_path, "r", encoding='utf-8') as f:
+            for line in f:
+                source.append(line.strip().replace('\t', ' '))
 
-# train model
-model.train(documents, total_examples=len(documents), epochs=10)
+    return source
 
-# fname, fvocab=None, binary=False
-model.save_word2vec_format('reddit.300d', fvocab=None, binary=True)
 
-# summarize the loaded model
-print(model)
-# summarize vocabulary
+# a memory-friendly iterator
+class MySentences(object):
+    def __init__(self, corpus_path_list, max_sentence_length):
+        self.corpus_path_list = corpus_path_list
+        self.max_sentence_length = max_sentence_length
 
-# access vector for one word
-print(model['reddit'])
-# save model
-# model.save('reddit.gensim.bin')
+    def __iter__(self):
+        for corpus_path in self.corpus_path_list:
+            # check there exists the corpus_path or not.
+            with io.open(corpus_path, "r", encoding='utf-8') as f:
+                for line in f:
+                    words = line.strip().replace('\t', ' ').split()
+                    yield words[:self.max_sentence_length]
 
-# load model
-# new_model = Word2Vec.load('model.bin')
-# print(new_model)
+
+if __name__ == '__main__':
+
+    program = os.path.basename(sys.argv[0])
+
+    logger = logging.getLogger(program)
+
+    logging.basicConfig(format='%(asctime)s: %(levelname)s: %(message)s')
+    logging.root.setLevel(level=logging.INFO)
+    logger.info("Running %s", ' '.join(sys.argv))
+
+    # get optional parameters
+    parser = argparse.ArgumentParser(description='train_embedding.py',
+                                     formatter_class=argparse.ArgumentDefaultsHelpFormatter)
+    train_embedding_opt(parser)
+    opt = parser.parse_args()
+
+    # Check and process input arguments.
+    max_length = opt.max_length
+
+    logger.info("Max article length: %s words.", max_length)
+
+    params = {
+        'size': opt.size,
+        'window': opt.window,
+        'min_count': opt.min_count,
+        'workers': max(1, multiprocessing.cpu_count() - 1),
+        'sample': opt.sample,
+        'alpha': opt.alpha,
+        'hs': opt.hs,
+        'negative': opt.negative
+
+    }
+
+    source = load_source(opt.corpus_path_list, logger)
+
+    # word2vec = Word2Vec(LineSentence(source, max_sentence_length=max_length),
+    #                     **params)
+
+    word2vec = Word2Vec(MySentences(source, max_sentence_length=max_length),
+                        **params)
+
+    vocab_size = len(word2vec.wv.vocab)
+    vocab_size_str = str(vocab_size)
+
+    # word2vec.save(outp) # Save the model.
+
+    # save word2vec
+    word2vec.wv.save_word2vec_format(
+        opt.save_path + '/reddit.w2v.{}.{}.{}d.txt'.format(vocab_size_str[0], len(vocab_size_str), opt.size),
+        binary=opt.binary)

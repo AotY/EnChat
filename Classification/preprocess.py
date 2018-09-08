@@ -175,6 +175,7 @@ def build_save_dataset(vocab, corpus_type, opt):
 
 
 def main():
+
     # get optional parameters
     parser = argparse.ArgumentParser(description='preprocess.py',
                                      formatter_class=argparse.ArgumentDefaultsHelpFormatter)
