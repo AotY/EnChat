@@ -36,9 +36,9 @@ def load_source(corpus_path_list, logger):
 
 # a memory-friendly iterator
 class MySentences(object):
-    def __init__(self, corpus_path_list, max_sentence_length):
+    def __init__(self, corpus_path_list, max_words):
         self.corpus_path_list = corpus_path_list
-        self.max_sentence_length = max_sentence_length
+        self.max_words = max_words
 
     def __iter__(self):
         for corpus_path in self.corpus_path_list:
@@ -46,7 +46,7 @@ class MySentences(object):
             with io.open(corpus_path, "r", encoding='utf-8') as f:
                 for line in f:
                     words = line.strip().replace('\t', ' ').split()
-                    yield words[:self.max_sentence_length]
+                    yield words[:self.max_words]
 
 
 if __name__ == '__main__':
@@ -66,9 +66,9 @@ if __name__ == '__main__':
     opt = parser.parse_args()
 
     # Check and process input arguments.
-    max_length = opt.max_length
+    max_words = opt.max_words
 
-    logger.info("Max article length: %s words.", max_length)
+    logger.info("Max article length: %s words.", max_words)
 
     params = {
         'size': opt.size,
@@ -87,7 +87,7 @@ if __name__ == '__main__':
     # word2vec = Word2Vec(LineSentence(source, max_sentence_length=max_length),
     #                     **params)
 
-    word2vec = Word2Vec(MySentences(source, max_sentence_length=max_length),
+    word2vec = Word2Vec(MySentences(source, max_words=max_words),
                         **params)
 
     vocab_size = len(word2vec.wv.vocab)
@@ -99,3 +99,5 @@ if __name__ == '__main__':
     word2vec.wv.save_word2vec_format(
         opt.save_path + '/reddit.w2v.{}.{}.{}d.txt'.format(vocab_size_str[0], len(vocab_size_str), opt.size),
         binary=opt.binary)
+
+    pass

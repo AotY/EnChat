@@ -25,10 +25,10 @@ def train_embedding_opt(parser):
                        help="If True, the data wil be saved in binary word2vec format, "
                             "else it will be saved in plain text.")
 
-    group.add_argument('-max_length',
+    group.add_argument('-max_words',
                        type=int,
                        default=80,
-                       help="""Max text length.
+                       help="""Max words size.
                        """)
 
     group.add_argument('-size',
