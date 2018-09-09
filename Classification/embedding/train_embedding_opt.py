@@ -9,7 +9,6 @@ import argparse
 
 
 def train_embedding_opt(parser):
-
     # Data options
     group = parser.add_argument_group('Data Preprocess')
 
@@ -86,4 +85,10 @@ def train_embedding_opt(parser):
                        default=5,
                        help="""If > 0, negative sampling will be used, the int for negative specifies how many "noise words"
             should be drawn (usually between 5-20).
+            """)
+
+    group.add_argument('-iter',
+                       type=int,
+                       default=5,
+                       help="""Number of iterations (epochs) over the corpus.
             """)
