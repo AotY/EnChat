@@ -27,6 +27,8 @@ def load_source(corpus_path_list, logger):
             logger.info('The path {} doese not exist for building vocabulary'.format(corpus_path))
             continue
 
+        logger.info("corpus_path: %s .", corpus_path)
+
         with io.open(corpus_path, "r", encoding='utf-8') as f:
             for line in f:
                 source.append(line.strip().replace('\t', ' '))
@@ -43,6 +45,9 @@ class MySentences(object):
     def __iter__(self):
         for corpus_path in self.corpus_path_list:
             # check there exists the corpus_path or not.
+
+            logger.info("corpus_path: %s .", corpus_path)
+
             with io.open(corpus_path, "r", encoding='utf-8') as f:
                 for line in f:
                     words = line.strip().replace('\t', ' ').split()
@@ -87,7 +92,7 @@ if __name__ == '__main__':
     # word2vec = Word2Vec(LineSentence(source, max_sentence_length=max_length),
     #                     **params)
 
-    word2vec = Word2Vec(MySentences(source, max_words=max_words),
+    word2vec = Word2Vec(MySentences(opt.corpus_path_list, max_words=max_words),
                         **params)
 
     vocab_size = len(word2vec.wv.vocab)
