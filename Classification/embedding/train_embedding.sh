@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 python train_embedding.py \
-    -train_corpus_path /home/Research/EnChat/askqa/train.post.txt /home/Research/EnChat/askqa/train.response.txt \
+    -corpus_path_list /home/Research/EnChat/askqa/train.post.txt /home/Research/EnChat/askqa/train.response.txt \
     -save_path data/reddit/askqa \
     -binary False \
     -max_words 50 \
