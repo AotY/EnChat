@@ -83,8 +83,8 @@ if __name__ == '__main__':
         'sample': opt.sample,
         'alpha': opt.alpha,
         'hs': opt.hs,
-        'negative': opt.negative
-
+        'negative': opt.negative,
+        'iter': iter
     }
 
     source = load_source(opt.corpus_path_list, logger)
@@ -98,7 +98,7 @@ if __name__ == '__main__':
     vocab_size = len(word2vec.wv.vocab)
     vocab_size_str = str(vocab_size)
 
-    # word2vec.save(outp) # Save the model.
+    word2vec.save(opt.save_path + '/reddit_word2vec.model') # Save the model.
 
     # save word2vec
     word2vec.wv.save_word2vec_format(
