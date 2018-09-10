@@ -47,6 +47,12 @@ def preprocess_opts(parser):
     group.add_argument('-share_vocab', action='store_true',
                        help="Share source and target vocabulary")
 
+    group.add_argument('-vocab_we_save_path',
+                       help="""Path to save word embedding of vocab,
+                       building from pre-trained word embedding. 
+                       (eg. word2vec, glove, or fasttext)
+                       """)
+
 
     # Truncation options, for text corpus
     group = parser.add_argument_group('Pruning')
@@ -89,9 +95,10 @@ def preprocess_opts(parser):
                        help="""pre-trained word embedding dim. 
                            """)
 
-    group.add_argument('-pre_word_vecs_file_type',
-                       default='binary',
-                       help="""pre-trained word embedding file type, binary or txt. 
+    group.add_argument('-binary',
+                       type=bool,
+                       default=False,
+                       help="""pre-trained word embedding file type, binary(True) or txt(False). 
                            """)
 
     group.add_argument('-pre_trained_vocab_embedding_file',

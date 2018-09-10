@@ -18,7 +18,7 @@ from gensim.models.word2vec import LineSentence
 from gensim.models.word2vec import Word2Vec
 from train_embedding_opt import train_embedding_opt
 
-
+'''
 def load_source(corpus_path_list, logger):
     source = []
     for corpus_path in corpus_path_list:
@@ -34,13 +34,14 @@ def load_source(corpus_path_list, logger):
                 source.append(line.strip().replace('\t', ' '))
 
     return source
-
+'''
 
 # a memory-friendly iterator
 class MySentences(object):
-    def __init__(self, corpus_path_list, max_words):
+    def __init__(self, corpus_path_list, max_words, lower):
         self.corpus_path_list = corpus_path_list
         self.max_words = max_words
+        self.lower = lower
 
     def __iter__(self):
         for corpus_path in self.corpus_path_list:
@@ -51,6 +52,9 @@ class MySentences(object):
             with io.open(corpus_path, "r", encoding='utf-8') as f:
                 for line in f:
                     words = line.strip().replace('\t', ' ').split()
+                    # to lower
+                    if self.lower:
+                        words = [word.lower() for word in words]
                     yield words[:self.max_words]
 
 
@@ -87,12 +91,11 @@ if __name__ == '__main__':
         'iter': opt.epochs
     }
 
-    source = load_source(opt.corpus_path_list, logger)
-
+    # source = load_source(opt.corpus_path_list, logger)
     # word2vec = Word2Vec(LineSentence(source, max_sentence_length=max_length),
     #                     **params)
 
-    word2vec = Word2Vec(MySentences(opt.corpus_path_list, max_words=max_words),
+    word2vec = Word2Vec(MySentences(opt.corpus_path_list, max_words=max_words, lower=opt.lower),
                         **params)
 
     vocab_size = len(word2vec.wv.vocab)

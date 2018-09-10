@@ -206,6 +206,7 @@ def build_model(model_opt, opt, checkpoint):
     return model
 
 def main():
+
     # Load checkpoint if we resume from a previous training.
     if opt.train_from:
         print('Loading checkpoint from %s' % opt.train_from)
@@ -222,7 +223,8 @@ def main():
     model = build_model(model_opt, opt, checkpoint)
     tally_parameters(model)
     check_save_model_path()
-    # 
+
+    #
     # if opt.pre_word_vecs is not None and os.path.exists(opt.pre_word_vecs):
     #     W = np.load(opt.pre_word_vecs)
     #     print('Loading embedding from {}'.format(opt.pre_word_vecs))

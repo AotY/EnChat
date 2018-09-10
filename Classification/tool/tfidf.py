@@ -41,7 +41,13 @@ class TFIDF:
                 for line in f:
                     # words = line.strip().replace('\t', ' ').split()
                     words = stop_word_obj.remove_words(line.strip().replace('\t', ' '))
+
+                    # to lower
+                    if opt.lower:
+                        words = [word.lower() for word in words]
+
                     words_set = set(words)
+
                     for word in words_set:
                         word_text_dict.setdefault(word, 0)
                         word_text_dict[word] += 1

@@ -61,6 +61,8 @@ opt.padding_idx = 0
 opt.numwords = len(vocab.word2idx)
 
 # loss function
+# BCEWithLogistsLoss: combines a `Sigmoid` layer and the `BCELoss` in one single class
+# https://discuss.pytorch.org/t/what-is-the-difference-between-bcewithlogitsloss-and-multilabelsoftmarginloss/14944
 criterion = nn.BCEWithLogitsLoss(size_average=False) # nn.NLLLoss(weight, size_average=False)
 
 progress_step = 0

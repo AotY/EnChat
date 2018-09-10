@@ -11,7 +11,7 @@ id_to_words = lambda idxs, idx2word: [idx2word.get(idx) for idx in idxs]
 words_to_id = lambda words, vocab: [vocab.word2idx.get(word, vocab.unkid) for word in words]
 
 
-def line_to_id(line, vocab, max_len=None, pre_trunc=True):
+def line_to_id(line, vocab, max_len=None, pre_trunc=True, lower=False):
     """Mapping words in line into index ids.
        Parameters:
          :param line, text, contains several words seperated by the space.
@@ -20,6 +20,11 @@ def line_to_id(line, vocab, max_len=None, pre_trunc=True):
          :param pre_trunc, bool, if true, pruning the left part of a line,
                                     false, keeping the left part.
     """
+
+    words = line.strip().split()
+
+    if lower:
+        words = [word.lower() for word in words]
     wids = [vocab.word2idx.get(w, vocab.unkid) for w in line.strip().split()]
 
     if max_len is None:
@@ -47,7 +52,7 @@ def text2id(source_file, out_path, vocab, logger):
         each line contains only one-column containing word list.
     '''
     logger.info("Unknown Word ID: {}".format(vocab.unkid))
-    with io.open(source_file, encoding='utf-8') as fin, open(out_path, 'w', encoding='utf-8') as fout:
+    with io.open(source_file, encoding='utf-8') as fin, io.open(out_path, 'w', encoding='utf-8') as fout:
         for line in fin:
             words = line.strip().split()
             wids = words_to_id(words, vocab)

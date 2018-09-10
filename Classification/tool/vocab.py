@@ -25,8 +25,6 @@ UNK = '<unk>'
 
 
 class Vocab(object):
-    '''
-    '''
 
     def __init__(self):
         self.init_vocab()
@@ -35,12 +33,18 @@ class Vocab(object):
         self.word2idx = {}
         self.idx2word = {}
 
-        self.word2idx['<pad>'] = 0
-        self.word2idx['<sos>'] = 1
-        self.word2idx['<eos>'] = 2
-        self.word2idx['<unk>'] = 3
+        ''' words '''
+        self.pad = '<pad>'
+        self.sos = '<sos>'
+        self.eos = '<eos>'
+        self.unk = '<unk>'
 
-    def build_vocab(self, corpus_path_list, stop_word_obj, min_count=None, max_size=None):
+        self.word2idx[self.pad] = 0
+        self.word2idx[self.sos] = 1
+        self.word2idx[self.eos] = 2
+        self.word2idx[self.unk] = 3
+
+    def build_vocab(self, corpus_path_list, stop_word_obj, min_count=None, max_size=None, lower=None):
         '''
             corpus_path_list, the path of corpus list
                 each line includes multi-column sequence (separated by '\t')
@@ -63,6 +67,9 @@ class Vocab(object):
                 for line in f:
                     # words = line.strip().replace('\t', ' ').split()
                     words = stop_word_obj.remove_words(line.strip().replace('\t', ' '))
+                    if lower:
+                        words = [word.lower() for word in words]
+
                     for word in words:
                         word_count[word] = word_count.get(word, 0) + 1
                         # or try ... except ...
@@ -134,3 +141,4 @@ class Vocab(object):
         """return the id of padding
         """
         return self.word2idx.get(EOS, 0)
+

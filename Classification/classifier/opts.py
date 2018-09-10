@@ -26,6 +26,12 @@ def model_opts(parser):
                        help="""pre-trained vocab embedding, from word2vec, glove or gensim
                        """)
 
+    group.add_argument('-binary',
+                       type=bool,
+                       default=False,
+                       help="""pre-trained word embedding file type, binary(True) or txt(False). 
+                               """)
+
     group.add_argument('-embedding_ranker_type',
                        default='avg',
                        help="""Embedding rankder type, eg avg, tfidf weight, extreme or EMD
@@ -42,6 +48,8 @@ def model_opts(parser):
     group.add_argument('-stop_word_file',
                        default='./stopwords_en.txt',
                        help="For loding stop_words")
+
+    group.add_argument('-lower', action='store_true', help='lowercase data')
     #
 
 

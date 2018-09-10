@@ -13,7 +13,7 @@ from tool.vocab import Vocab
 from tool.datasetbase import DataSet
 from tool.preprocess_opt import preprocess_opts
 from tool.func_utils import line_to_id, load_w2v_txt
-from embedding.load_embedding import load_word2vec, load_glove
+from embedding.load_embedding import build_vocab_word2vec, build_vocab_glove, build_vocab_fastText
 from tool.tfidf import TFIDF
 from tool.remove_stop_words import StopWord
 
@@ -38,7 +38,9 @@ def build_save_text_dataset_in_shards(vocab, corpus_list, opt, corpus_type):
     examples, line_index, last_pos, out_index = ([], 0, 0, 1)
 
     while True:
+
         if opt.max_shard_size != 0 and line_index % 64 == 0:
+            # tell(): Return the file’s current position
             cur_pos = f_list[0].tell()
             if cur_pos >= last_pos + opt.max_shard_size:
                 last_pos = cur_pos
@@ -95,6 +97,7 @@ def build_save_vocab(opt, stop_word_obj):
                       stop_word_obj,
                       min_count=opt.words_min_frequency,
                       max_size=opt.vocab_size,
+                      lower=opt.lower
                       )
 
     torch.save(vocab, opt.vocab_path)
@@ -138,25 +141,34 @@ def build_vocab_embedding(vocab, opt):
 
     vocab_size = max(opt.vocab_size, len(vocab.word2idx))
     print("vocab_size: {}".format(vocab_size))
+
+    out_of_vocab_count = 0
     if opt.pre_word_vecs_path is not None and os.path.exists(opt.pre_word_vecs_path):
         if opt.pre_word_vecs_type == 'word2vec':
-            in_pretrained_count, pre_trained_embedding = load_word2vec(vocab, vocab_size, opt.pre_word_vecs_path, opt.pre_word_vecs_dim, opt.pre_word_vecs_file_type)
+            # vocab, vocab_size, vec_file, embedding_dim, binary, pre_trained_vocab_embedding_file
+            out_of_vocab_count = build_vocab_word2vec(vocab, vocab_size, opt.pre_word_vecs_path, opt.pre_word_vecs_dim, opt.binary, opt.pre_trained_vocab_embedding_file)
         elif opt.pre_word_vecs_type == 'glove':
-            in_pretrained_count, pre_trained_embedding = load_glove(vocab, vocab_size, opt.pre_word_vecs_path, opt.pre_word_vecs_dim, opt.pre_word_vecs_file_type)
+            out_of_vocab_count = build_vocab_glove(vocab, vocab_size, opt.pre_word_vecs_path, opt.pre_word_vecs_dim, opt.binary, opt.pre_trained_vocab_embedding_file)
+        elif opt.pre_word_vecs_type == 'fasttext':
+            out_of_vocab_count = build_vocab_fastText(vocab, vocab_size, opt.pre_word_vecs_path, opt.pre_word_vecs_dim, opt.binary, opt.pre_trained_vocab_embedding_file)
+
 
         print("Dim: {}, Vocab_size:{}, Numbers of not in {}: {}".format(
                                                 opt.pre_word_vecs_dim,
                                                 opt.vocab_size,
                                                 opt.pre_word_vecs_type,
-                                                vocab_size - in_pretrained_count))
+                                                out_of_vocab_count))
 
+        '''
         print("pre_trained_embedding.shape: {}".format(pre_trained_embedding.shape))
-
+        
         if opt.pre_trained_vocab_embedding_file == None:
             save_file = opt.save_data + '/vocab_{}.{}d.npy'.format(opt.pre_word_vecs_type, opt.pre_word_vecs_dim)
         else:
             save_file = opt.pre_trained_vocab_embedding_file
         np.save(save_file, pre_trained_embedding)
+        '''
+
 
 def build_save_dataset(vocab, corpus_type, opt):
     assert corpus_type in ['train', 'valid', 'test']
@@ -185,11 +197,12 @@ def main():
     stop_word_obj = StopWord(opt.stop_word_file)
 
     # 
-    # print("Building & saving vocabulary...")
-    # vocab = build_save_vocab(opt, stop_word_obj)
+    print("Building & saving vocabulary...")
+    vocab = build_save_vocab(opt, stop_word_obj)
+    print('vocab_size: %d' % len(vocab.word2idx))
 
-    # print("Load pre-trained word embedding, and build embedding for vocab")
-    # build_vocab_embedding(vocab, opt)
+    print("Load pre-trained word embedding, and build embedding for vocab")
+    build_vocab_embedding(vocab, opt)
 
     print("build tf-idf for word")
     tfidf = TFIDF()
@@ -197,7 +210,7 @@ def main():
     torch.save(tfidf, opt.save_data + '/vocab.tfidf.pt')
     print('reddit idf: {}'.format(tfidf.get_idf('reddit')))
 
-    # print("Building & saving training data...")
+    print("Building & saving training data...")
     # build_save_dataset(vocab, 'train', opt)
     #
     # print("Building & saving validation data...")

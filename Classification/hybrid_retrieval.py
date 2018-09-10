@@ -34,9 +34,10 @@ from tool.func_utils import sentence_pad
 
 from search_es import connet_es
 from search_es import _do_query_use_file_info
-from embedding.embedding_score import get_avg_embedding_score, get_tfidf_embedding_score
+from embedding.embedding_score import get_avg_embedding_score, get_tfidf_embedding_score, get_wmd_embedding_score
 from tool.tfidf import TFIDF
 from tool.remove_stop_words import StopWord
+from gensim.models import KeyedVectors
 
 ##################### running logger #########################################
 runlog_name = "log/chatting.{}.log".format(datetime.date.today())
@@ -69,7 +70,10 @@ opt.padding_idx = 0
 opt.numwords = len(vocab.word2idx)
 
 # Load pre-trained embedding for vocab
-pre_trained_embedding = np.load(opt.pre_trained_vocab_embedding)
+# pre_trained_embedding = np.load(opt.pre_trained_vocab_embedding)
+
+# Load gensim model
+gensim_model = KeyedVectors.load_word2vec_format(opt.pre_trained_vocab_embedding, binary=opt.binary)
 
 # Load TFIDF object, for computing word's tfidf value.
 tfidf = torch.load(opt.vocab_tfidf)
@@ -84,11 +88,11 @@ def format_query_candidates(query, candidates):
         mapping text to ids, 
     """
     # words to ids, lack of tokenization, 
-    len_query, id_query = line_to_id(query, vocab, max_len=15)
+    len_query, id_query = line_to_id(query, vocab, max_len=15, lower=opt.lower)
 
     pairs = []
     for candidate in candidates:
-        len_candidate, id_candidate = line_to_id(candidate, vocab, max_len=15, pre_trunc=False)
+        len_candidate, id_candidate = line_to_id(candidate, vocab, max_len=15, pre_trunc=False, lower=opt.lower )
         pairs.append([len_query, id_query, len_candidate, id_candidate])
     return pairs
 
@@ -200,11 +204,9 @@ while True:
     # batch []
     vector_query = pairs[0][1]
     matrix_candidate = [pair[-1] for pair in pairs]
-    avg_embedding_score = get_avg_embedding_score(pre_trained_embedding, vector_query,
-                                                  matrix_candidate)  # opt.embedding_ranker_type
-
-    avg_embedding_score = avg_embedding_score.data.cpu().numpy()
+    avg_embedding_score = get_avg_embedding_score(vocab, gensim_model, input_str, candidate_replies, stop_word_obj, opt.lower)  # opt.embedding_ranker_type
     avg_embedding_rank = np.argsort(avg_embedding_score)
+    avg_embedding_rank = avg_embedding_rank[::-1].tolist()
     for idx, e_idx in enumerate(avg_embedding_rank[:10]):
         run_logger.info(
             "Avg Embedding Ranker, c{}, {}, {}".format(idx, candidate_replies[e_idx], avg_embedding_score[e_idx]))
@@ -212,25 +214,38 @@ while True:
     print(">> \t{}\t{} :S3".format(candidate_replies[index], avg_embedding_score[index]))
 
     ############################# Re-Rank using a Word Embedding-based with TFIDF weight Ranker#############
-    tfidf_embedding_score = get_tfidf_embedding_score(vocab, pre_trained_embedding, input_str, candidate_replies,
-                                                      tfidf, stop_word_obj)
-    tfidf_embedding_score = tfidf_embedding_score.data.cpu().numpy()
+    tfidf_embedding_score = get_tfidf_embedding_score(vocab, gensim_model, tfidf, input_str, candidate_replies, stop_word_obj, opt.lower)
     tfidf_embedding_rank = np.argsort(tfidf_embedding_score)
+    tfidf_embedding_rank = tfidf_embedding_rank[::-1].tolist()
     for idx, te_idx in enumerate(tfidf_embedding_rank[:10]):
         run_logger.info(
             "TFIDF Embedding Ranker, c{}, {}, {}".format(idx, candidate_replies[te_idx], tfidf_embedding_score[te_idx]))
-    index = random.sample(avg_embedding_rank[:10], 1)[0]
+    index = random.sample(tfidf_embedding_rank[:10], 1)[0]
     print(">> \t{}\t{} :S4".format(candidate_replies[index], tfidf_embedding_score[index]))
+
+
+    ############################# Re-Rank using a Word Embedding-based with WMD (EMD) Ranker#############
+    wmd_embedding_score = get_wmd_embedding_score(gensim_model, input_str, candidate_replies, stop_word_obj, opt.lower)
+    wmd_embedding_rank = np.argsort(wmd_embedding_score)
+    wmd_embedding_rank = wmd_embedding_rank[::-1].tolist()
+
+    for idx, w_idx in enumerate(wmd_embedding_rank[:10]):
+        run_logger.info(
+            "WMD Embedding Ranker, c{}, {}, {}".format(idx, candidate_replies[w_idx], wmd_embedding_score[w_idx]))
+    index = random.sample(wmd_embedding_rank[:10], 1)[0]
+    print(">> \t{}\t{} :S5".format(candidate_replies[index], wmd_embedding_score[index]))
 
     ############################# Hybird #############################
     print('cnn_scores: {} '.format(cnn_scores))
     print('avg_embedding_score: {} '.format(avg_embedding_score))
     print('tfidf_embedding_score: {} '.format(tfidf_embedding_score))
-    hybrid_score = np.mean([cnn_scores, avg_embedding_score, tfidf_embedding_score], axis=0)
+    print('WMD embedding_score: {} '.format(wmd_embedding_score))
+    hybrid_score = np.mean([cnn_scores, avg_embedding_score, tfidf_embedding_score, wmd_embedding_score], axis=0)
     print('hybrid_score: {} '.format(hybrid_score))
     hybrid_embedding_rank = np.argsort(hybrid_score)
+    hybrid_embedding_rank = hybrid_embedding_rank[::-1].tolist()
     for idx, h_idx in enumerate(hybrid_embedding_rank[:10]):
         run_logger.info(
             "Hybrid Ranker, c{}, {}, {}".format(idx, candidate_replies[h_idx], hybrid_score[h_idx]))
     index = random.sample(hybrid_embedding_rank[:10], 1)[0]
-    print(">> \t{}\t{} :S5".format(candidate_replies[index], hybrid_score[index]))
+    print(">> \t{}\t{} :S6".format(candidate_replies[index], hybrid_score[index]))

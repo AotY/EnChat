@@ -32,7 +32,7 @@ def train_embedding_opt(parser):
 
     group.add_argument('-size',
                        type=int,
-                       default=100,
+                       default=128,
                        help="""Dimensionality of the feature vectors.
                        """)
 
@@ -92,3 +92,5 @@ def train_embedding_opt(parser):
                        default=5,
                        help="""Number of iterations (epochs) over the corpus.
             """)
+
+    group.add_argument('-lower', action='store_true', help='lowercase data')

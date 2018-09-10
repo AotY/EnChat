@@ -24,6 +24,9 @@ python hybrid_retrieval.py \
     -save_data data/reddit/askqa \
     -vocab_tfidf data/reddit/askqa/vocab.tfidf.pt \
     -pre_trained_vocab_embedding data/reddit/askqa/vocab_word2vec.300d.npy \
+    -binary False
+    -lower \
+
 
 /
 
