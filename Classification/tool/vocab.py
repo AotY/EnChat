@@ -88,6 +88,7 @@ class Vocab(object):
 
         # build word2idx and idx2word
         self.init_vocab()
+
         for word, _ in ranked_word_list:
             self.word2idx[word] = len(self.word2idx)
 
