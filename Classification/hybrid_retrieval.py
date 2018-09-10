@@ -202,6 +202,8 @@ while True:
     matrix_candidate = [pair[-1] for pair in pairs]
     avg_embedding_score = get_avg_embedding_score(pre_trained_embedding, vector_query,
                                                   matrix_candidate)  # opt.embedding_ranker_type
+
+    avg_embedding_score = avg_embedding_score.data.cpu().numpy()
     avg_embedding_rank = np.argsort(avg_embedding_score)
     for idx, e_idx in enumerate(avg_embedding_rank[:10]):
         run_logger.info(
@@ -212,6 +214,7 @@ while True:
     ############################# Re-Rank using a Word Embedding-based with TFIDF weight Ranker#############
     tfidf_embedding_score = get_tfidf_embedding_score(vocab, pre_trained_embedding, input_str, candidate_replies,
                                                       tfidf, stop_word_obj)
+    tfidf_embedding_score = tfidf_embedding_score.data.cpu().numpy()
     tfidf_embedding_rank = np.argsort(tfidf_embedding_score)
     for idx, te_idx in enumerate(tfidf_embedding_rank[:10]):
         run_logger.info(
@@ -223,7 +226,7 @@ while True:
     print('cnn_scores: {} '.format(cnn_scores))
     print('avg_embedding_score: {} '.format(avg_embedding_score))
     print('tfidf_embedding_score: {} '.format(tfidf_embedding_score))
-    hybrid_score = np.mean(cnn_scores + avg_embedding_score + tfidf_embedding_score, axis=0)
+    hybrid_score = np.mean(np.add(np.add(cnn_scores, avg_embedding_score), tfidf_embedding_score), axis=0)
     hybrid_embedding_rank = np.argsort(hybrid_score)
     for idx, h_idx in enumerate(hybrid_embedding_rank[:10]):
         run_logger.info(

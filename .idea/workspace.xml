@@ -23,8 +23,8 @@
       <file leaf-file-name="hybrid_retrieval.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Classification/hybrid_retrieval.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="558">
-              <caret line="228" column="24" lean-forward="true" selection-start-line="228" selection-start-column="24" selection-end-line="228" selection-end-column="24" />
+            <state relative-caret-position="510">
+              <caret line="227" column="67" lean-forward="false" selection-start-line="227" selection-start-column="46" selection-end-line="227" selection-end-column="67" />
               <folding>
                 <element signature="e#502#533#0" expanded="true" />
               </folding>
@@ -45,8 +45,8 @@
       <file leaf-file-name="embedding_score.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Classification/embedding/embedding_score.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="302">
-              <caret line="79" column="41" lean-forward="false" selection-start-line="79" selection-start-column="37" selection-end-line="79" selection-end-column="41" />
+            <state relative-caret-position="229">
+              <caret line="103" column="0" lean-forward="true" selection-start-line="103" selection-start-column="0" selection-end-line="103" selection-end-column="0" />
               <folding>
                 <element signature="e#24#55#0" expanded="true" />
               </folding>
@@ -57,8 +57,8 @@
       <file leaf-file-name="chatting.2018-08-10.log" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/log/chatting.2018-08-10.log">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="487">
-              <caret line="37" column="31" lean-forward="false" selection-start-line="37" selection-start-column="31" selection-end-line="37" selection-end-column="31" />
+            <state relative-caret-position="357">
+              <caret line="32" column="38" lean-forward="true" selection-start-line="32" selection-start-column="7" selection-end-line="32" selection-end-column="38" />
               <folding />
             </state>
           </provider>
@@ -143,7 +143,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>opts</find>
       <find>stop</find>
       <find>cur_pos</find>
       <find>logger</find>
@@ -173,6 +172,7 @@
       <find>StopWord</find>
       <find>word_id</find>
       <find>get_tfidf_embedding_score</find>
+      <find>cnn_scores</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -834,16 +834,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Classification/embedding/embedding_score.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="302">
-          <caret line="79" column="41" lean-forward="false" selection-start-line="79" selection-start-column="37" selection-end-line="79" selection-end-column="41" />
-          <folding>
-            <element signature="e#24#55#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Classification/tool/tfidf.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="46">
@@ -856,9 +846,19 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/log/chatting.2018-08-10.log">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="487">
-          <caret line="37" column="31" lean-forward="false" selection-start-line="37" selection-start-column="31" selection-end-line="37" selection-end-column="31" />
+        <state relative-caret-position="357">
+          <caret line="32" column="38" lean-forward="true" selection-start-line="32" selection-start-column="7" selection-end-line="32" selection-end-column="38" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Classification/embedding/embedding_score.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="229">
+          <caret line="103" column="0" lean-forward="true" selection-start-line="103" selection-start-column="0" selection-end-line="103" selection-end-column="0" />
+          <folding>
+            <element signature="e#24#55#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -872,8 +872,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Classification/hybrid_retrieval.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="558">
-          <caret line="228" column="24" lean-forward="true" selection-start-line="228" selection-start-column="24" selection-end-line="228" selection-end-column="24" />
+        <state relative-caret-position="510">
+          <caret line="227" column="67" lean-forward="false" selection-start-line="227" selection-start-column="46" selection-end-line="227" selection-end-column="67" />
           <folding>
             <element signature="e#502#533#0" expanded="true" />
           </folding>
