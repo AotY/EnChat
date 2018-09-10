@@ -220,7 +220,10 @@ while True:
     print(">> \t{}\t{} :S4".format(candidate_replies[index], tfidf_embedding_score[index]))
 
     ############################# Hybird #############################
-    hybrid_score = np.mean(cnn_scores + avg_embedding_score + tfidf_embedding_score)
+    print('cnn_scores: {} '.format(cnn_scores))
+    print('avg_embedding_score: {} '.format(avg_embedding_score))
+    print('tfidf_embedding_score: {} '.format(tfidf_embedding_score))
+    hybrid_score = np.mean(cnn_scores + avg_embedding_score + tfidf_embedding_score, axis=0)
     hybrid_embedding_rank = np.argsort(hybrid_score)
     for idx, h_idx in enumerate(hybrid_embedding_rank[:10]):
         run_logger.info(
