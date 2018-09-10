@@ -97,7 +97,7 @@ def get_tfidf_embedding_score(vocab, pre_trained_embedding, input_str, candidate
         else:
             candidate_tfidf_weights = np.divide(candidate_tfidf_weights, np.sum(candidate_tfidf_weights))
 
-        candidate_tfidf_weight_vector = np.zeros_like(embedding_dim)
+        candidate_tfidf_weight_vector = np.zeros(embedding_dim, dtype=np.float64)
 
         for id_can, weight in zip(vector_candidate_ids, candidate_tfidf_weights):
             candidate_tfidf_weight_vector += pre_trained_embedding[id_can] * weight
