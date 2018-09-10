@@ -50,14 +50,14 @@ def get_tfidf_embedding_score(vocab, pre_trained_embedding, input_str, candidate
     query_max_weight = np.max(query_tfidf_weights)
     if query_min_weight != query_max_weight:
         query_tfidf_weights = np.divide((query_tfidf_weights - query_min_weight),
-                                        (query_max_weight - query_max_weight) * 1.0)
+                                        (query_max_weight - query_min_weight) * 1.0)
     else:
         query_tfidf_weights = np.divide(query_tfidf_weights, np.sum(query_tfidf_weights))
 
-    query_tfidf_weight_vector = np.zeros(embedding_dim)
+    query_tfidf_weight_vector = np.zeros(embedding_dim, dtype=np.float64)
 
     for id_query, weight in zip(vector_query_ids, query_tfidf_weights):
-        query_tfidf_weight_vector += pre_trained_embedding[id_query] * weight
+        query_tfidf_weight_vector = np.add(query_tfidf_weight_vector, pre_trained_embedding[id_query] * weight)
 
     candidate_tfidf_weight_matrix = []
     for candidate_replie in candidate_replies:
@@ -90,7 +90,6 @@ def get_tfidf_embedding_score(vocab, pre_trained_embedding, input_str, candidate
         # scalar
         candidate_min_weight = np.min(candidate_tfidf_weights)
         candidate_max_weight = np.max(candidate_tfidf_weights)
-
 
         if candidate_min_weight != candidate_max_weight:
             candidate_tfidf_weights = np.divide((candidate_tfidf_weights - candidate_min_weight),
