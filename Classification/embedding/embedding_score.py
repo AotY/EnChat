@@ -28,9 +28,7 @@ def get_tfidf_embedding_score(vocab, pre_trained_embedding, vector_query, input_
         word_id = vocab.word2idx[word]
         if word == vocab.unkid:
             continue
-
-        word_tfidf = (query_words_counter[word] / query_len) * tfidf.get_tfidf(word, 0)
-
+        word_tfidf = (query_words_counter[word] / query_len) * tfidf.get_tfidf(word)
         if word_tfidf != 0:
             for idx, query_id in enumerate(vector_query):
                 if query_id == word_id:
@@ -68,7 +66,7 @@ def get_tfidf_embedding_score(vocab, pre_trained_embedding, vector_query, input_
             if word == vocab.unkid:
                 continue
 
-            word_tfidf = (candidate_words_counter[word] / candidate_len) * tfidf.get_tfidf(word, 0)
+            word_tfidf = (candidate_words_counter[word] / candidate_len) * tfidf.get_tfidf(word)
 
             if word_tfidf != 0:
                 for idx, can_id in enumerate(vector_candidate):

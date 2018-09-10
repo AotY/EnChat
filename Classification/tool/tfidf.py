@@ -56,7 +56,7 @@ class TFIDF:
         return tfidf_value
 
 
-    def get_tfidf(self, word, default=0):
+    def get_tfidf(self, word, default=0.0):
         '''
         Obtain word's idf value, in order to compute word's tfidf value.
         :param word:
