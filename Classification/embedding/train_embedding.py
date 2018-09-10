@@ -79,12 +79,12 @@ if __name__ == '__main__':
         'size': opt.size,
         'window': opt.window,
         'min_count': opt.min_count,
-        'workers': max(1, multiprocessing.cpu_count() - 1),
+        'workers': max(1, multiprocessing.cpu_count() - 2),
         'sample': opt.sample,
         'alpha': opt.alpha,
         'hs': opt.hs,
         'negative': opt.negative,
-        'iter': iter
+        'iter': opt.epochs
     }
 
     source = load_source(opt.corpus_path_list, logger)

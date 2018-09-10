@@ -9,7 +9,7 @@ python train_embedding.py \
     -alpha 0.025 \
     -min_count 7 \
     -negative 7 \
-    -iter 7 \
+    -epochs 7 \
 
 /
 

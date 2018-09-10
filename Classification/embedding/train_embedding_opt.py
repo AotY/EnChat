@@ -87,7 +87,7 @@ def train_embedding_opt(parser):
             should be drawn (usually between 5-20).
             """)
 
-    group.add_argument('-iter',
+    group.add_argument('-epochs',
                        type=int,
                        default=5,
                        help="""Number of iterations (epochs) over the corpus.
