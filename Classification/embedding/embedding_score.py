@@ -72,8 +72,7 @@ def get_tfidf_embedding_score(vocab, pre_trained_embedding, input_str, candidate
         candidate_words_set = set(candidate_words)
 
         for word in candidate_words_set:
-            word_id = vocab.word2idx[word]
-
+            word_id = vocab.word2idx.get(word, vocab.unkid)
             if word_id == vocab.unkid:
                 continue
 
