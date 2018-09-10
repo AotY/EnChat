@@ -226,10 +226,11 @@ while True:
     print('cnn_scores: {} '.format(cnn_scores))
     print('avg_embedding_score: {} '.format(avg_embedding_score))
     print('tfidf_embedding_score: {} '.format(tfidf_embedding_score))
-    hybrid_score = np.mean(np.add(np.add(cnn_scores, avg_embedding_score), tfidf_embedding_score), axis=0)
+    hybrid_score = np.mean([cnn_scores, avg_embedding_score, tfidf_embedding_score], axis=0)
+    print('hybrid_score: {} '.format(hybrid_score))
     hybrid_embedding_rank = np.argsort(hybrid_score)
     for idx, h_idx in enumerate(hybrid_embedding_rank[:10]):
         run_logger.info(
-            "Hybrid Ranker, c{}, {}, {}".format(idx, candidate_replies[h_idx], tfidf_embedding_score[h_idx]))
+            "Hybrid Ranker, c{}, {}, {}".format(idx, candidate_replies[h_idx], hybrid_score[h_idx]))
     index = random.sample(hybrid_embedding_rank[:10], 1)[0]
     print(">> \t{}\t{} :S5".format(candidate_replies[index], hybrid_score[index]))
