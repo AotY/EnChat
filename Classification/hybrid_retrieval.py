@@ -38,7 +38,6 @@ from embedding.embedding_score import get_avg_embedding_score, get_tfidf_embeddi
 from tool.tfidf import TFIDF
 from tool.remove_stop_words import StopWord
 
-
 ##################### running logger #########################################
 runlog_name = "log/chatting.{}.log".format(datetime.date.today())
 run_logger = logging.getLogger('runlog')
@@ -77,6 +76,7 @@ tfidf = torch.load(opt.vocab_tfidf)
 
 # Load stop_words
 stop_word_obj = StopWord(opt.stop_word_file)
+
 
 ############################### utile func ####################################
 def format_query_candidates(query, candidates):
@@ -200,33 +200,30 @@ while True:
     # batch []
     vector_query = pairs[0][1]
     matrix_candidate = [pair[-1] for pair in pairs]
-    avg_embedding_score = get_avg_embedding_score(pre_trained_embedding, vector_query, matrix_candidate) # opt.embedding_ranker_type
+    avg_embedding_score = get_avg_embedding_score(pre_trained_embedding, vector_query,
+                                                  matrix_candidate)  # opt.embedding_ranker_type
     avg_embedding_rank = np.argsort(avg_embedding_score)
     for idx, e_idx in enumerate(avg_embedding_rank[:10]):
-        run_logger.info("Avg Embedding Ranker, c{}, {}, {}".format(idx, candidate_replies[e_idx], avg_embedding_score[e_idx]))
+        run_logger.info(
+            "Avg Embedding Ranker, c{}, {}, {}".format(idx, candidate_replies[e_idx], avg_embedding_score[e_idx]))
     index = random.sample(avg_embedding_rank[:10], 1)[0]
     print(">> \t{}\t{} :S3".format(candidate_replies[index], avg_embedding_score[index]))
 
-
     ############################# Re-Rank using a Word Embedding-based with TFIDF weight Ranker#############
-    tfidf_embedding_score = get_tfidf_embedding_score(vocab, pre_trained_embedding, input_str, candidate_replies,  tfidf, stop_word_obj)
+    tfidf_embedding_score = get_tfidf_embedding_score(vocab, pre_trained_embedding, input_str, candidate_replies,
+                                                      tfidf, stop_word_obj)
     tfidf_embedding_rank = np.argsort(tfidf_embedding_score)
     for idx, te_idx in enumerate(tfidf_embedding_rank[:10]):
-        run_logger.info("TFIDF Embedding Ranker, c{}, {}, {}".format(idx, candidate_replies[te_idx], tfidf_embedding_score[te_idx]))
+        run_logger.info(
+            "TFIDF Embedding Ranker, c{}, {}, {}".format(idx, candidate_replies[te_idx], tfidf_embedding_score[te_idx]))
     index = random.sample(avg_embedding_rank[:10], 1)[0]
     print(">> \t{}\t{} :S4".format(candidate_replies[index], tfidf_embedding_score[index]))
-
 
     ############################# Hybird #############################
     hybrid_score = np.mean(cnn_scores + avg_embedding_score + tfidf_embedding_score)
     hybrid_embedding_rank = np.argsort(hybrid_score)
     for idx, h_idx in enumerate(hybrid_embedding_rank[:10]):
-        run_logger.info("Hybrid Ranker, c{}, {}, {}".format(idx, candidate_replies[h_idx], tfidf_embedding_score[h_idx]))
+        run_logger.info(
+            "Hybrid Ranker, c{}, {}, {}".format(idx, candidate_replies[h_idx], tfidf_embedding_score[h_idx]))
 
     print(">> \t{}\t{} :S5".format(candidate_replies[index], hybrid_score[index]))
-
-
-
-
-
-
