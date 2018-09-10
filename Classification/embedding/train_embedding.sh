@@ -11,7 +11,8 @@ python train_embedding.py \
     -negative 7 \
     -epochs 5 \
     -lower \
-/
+
+
 
 #python train_embedding.py \
 #    -corpus_path_list /home/Research/EnChat/askqa/train.post.txt /home/Research/EnChat/askqa/train.response.txt \
@@ -24,6 +25,5 @@ python train_embedding.py \
 #    -min_count 7 \
 #    -negative 7 \
 #    -epochs 7 \
-#
-#/
 
+/
