@@ -50,13 +50,14 @@ class TFIDF:
 
         for word, word_text_count in word_text_dict.iteritems():
             self.idf_dict[word] = np.log(self.text_count / word_text_count)
+            print('word: {}, idf: {}'.format(word, self.idf_dict[word]))
 
-    def compute_tfidf(self, word, tf):
-        tfidf_value = tf * np.log(self.text_count / self.idf_dict[word])
-        return tfidf_value
+    # def compute_tfidf(self, word, tf):
+    #     tfidf_value = tf * np.log(self.text_count / self.idf_dict[word])
+    #     return tfidf_value
 
 
-    def get_tfidf(self, word, default=0.0):
+    def get_idf(self, word, default=0.0):
         '''
         Obtain word's idf value, in order to compute word's tfidf value.
         :param word:

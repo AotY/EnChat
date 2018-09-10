@@ -31,7 +31,7 @@ def get_tfidf_embedding_score(vocab, pre_trained_embedding, vector_query, input_
             continue
 
         tf = query_words_counter[word] / query_len
-        idf = tfidf.get_tfidf(word, 0.0)
+        idf = tfidf.get_idf(word, 0.0)
         if idf is None:
             idf = 0.0
         word_tfidf = tf * idf
@@ -77,7 +77,7 @@ def get_tfidf_embedding_score(vocab, pre_trained_embedding, vector_query, input_
             # word_tfidf = (candidate_words_counter[word] / candidate_len) * tfidf.get_tfidf(word)
 
             tf = candidate_words_counter[word] / candidate_len
-            idf = tfidf.get_tfidf(word, 0.0)
+            idf = tfidf.get_idf(word, 0.0)
             if idf is None:
                 idf = 0.0
             word_tfidf = tf * idf
@@ -100,7 +100,8 @@ def get_tfidf_embedding_score(vocab, pre_trained_embedding, vector_query, input_
 
         candidate_tfidf_weight_matrix.append(candidate_tfidf_weight_vector)
 
-    # candidate_tfidf_weight_matrix = np.array(candidate_tfidf_weight_matrix).reshape(len(candidate_replies), embedding_dim)
+    query_tfidf_weight_vector = query_tfidf_weight_vector.reshape(1, -1)
+    candidate_tfidf_weight_matrix = np.array(candidate_tfidf_weight_matrix).reshape(len(candidate_replies), embedding_dim)
 
     # To tensor
     query_tfidf_weight_vector = torch.Tensor(query_tfidf_weight_vector)
