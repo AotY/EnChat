@@ -9,99 +9,102 @@ from collections import Counter
 '''
 Get embedding score with tfidf weight
 '''
-def get_tfidf_embedding_score(vocab, pre_trained_embedding, vector_query, input_str, matrix_candidate, candidate_replies,  tfidf, stop_word_obj):
 
+
+def get_tfidf_embedding_score(vocab, pre_trained_embedding, input_str, candidate_replies, tfidf, stop_word_obj):
     # embedding dim
     embedding_dim = pre_trained_embedding.shape[1]
 
-    # init
-    query_tfidf_weights = np.array([round(1.0 / embedding_dim, 5)] * embedding_dim)
-
     query_words = stop_word_obj.remove_words(input_str.strip().replace('\t', ' '))
     query_len = len(query_words)
+
+    # init
+    query_tfidf_weights = np.array([round(1.0 / query_len, 5)] * query_len)
+
     # freq
     query_words_counter = Counter(query_words)
 
+    vector_query_ids = []
     # conpute tfidf
     query_words_set = set(query_words)
     for word in query_words_set:
         print('query_word:    {}'.format(word))
         word_id = vocab.word2idx[word]
+
         if word == vocab.unkid:
             continue
 
+        # word_embedding = pre_trained_embedding[word_id]
+        vector_query_ids.append(word_id)
+
         tf = query_words_counter[word] / query_len
-        idf = tfidf.get_idf(word, 0.0)
-        if idf is None:
-            idf = 0.0
+        idf = tfidf.idf_dict.get(word, 0.0)
+
         word_tfidf = tf * idf
+
         print('word_tfidf:    {}'.format(word_tfidf))
 
         if word_tfidf != 0:
-            for idx, query_id in enumerate(vector_query):
-                if query_id == word_id:
+            for idx, word2 in enumerate(query_words):
+                if word == word2:
                     query_tfidf_weights[idx] = word_tfidf
-    '''
-    for idx, word_id in enumerate(vector_query):
-        word = vocab.idx2word[word_id]
-        if word in query_words:
-            word_tfidf = ( query_words_counter[word] / query_len) * tfidf.get(word, 0)
-            if word_tfidf != 0:
-                query_tfidf_weights[idx] = word_tfidf
-    '''
 
     # scalar
     query_min_weight = np.min(query_tfidf_weights)
     query_max_weight = np.max(query_tfidf_weights)
-    query_tfidf_weights = (query_tfidf_weights - query_min_weight) / (query_max_weight - query_max_weight)
+    query_tfidf_weights = np.divide((query_tfidf_weights - query_min_weight),
+                                    (query_max_weight - query_max_weight) * 1.0)
 
     query_tfidf_weight_vector = np.zeros_like(query_tfidf_weights)
 
-    for id_query, weight in zip(vector_query, query_tfidf_weights):
+    for id_query, weight in zip(vector_query_ids, query_tfidf_weights):
         query_tfidf_weight_vector += pre_trained_embedding[id_query] * weight
 
     candidate_tfidf_weight_matrix = []
-    for candidate_replie, vector_candidate in zip(candidate_replies, matrix_candidate):
-        candidate_tfidf_weights = np.array([round(1.0 / embedding_dim, 5)] * embedding_dim)
+    for candidate_replie in candidate_replies:
         candidate_words = stop_word_obj.remove_words(input_str.strip().replace('\t', ' '))
         candidate_len = len(query_words)
         candidate_words_counter = Counter(query_words)
 
+        candidate_tfidf_weights = np.array([round(1.0 / candidate_len, 5)] * candidate_len)
+
         # conpute tfidf
         candidate_words_set = set(candidate_words)
+
+        vector_candidate_ids = []
         for word in candidate_words_set:
             word_id = vocab.word2idx[word]
             if word == vocab.unkid:
                 continue
 
-            # word_tfidf = (candidate_words_counter[word] / candidate_len) * tfidf.get_tfidf(word)
+            vector_candidate_ids.append(word_id)
 
             tf = candidate_words_counter[word] / candidate_len
-            idf = tfidf.get_idf(word, 0.0)
-            if idf is None:
-                idf = 0.0
+            idf = tfidf.idf_dict.get(word, 0.0)
             word_tfidf = tf * idf
-            print('word_tfidf:    {}'.format(word_tfidf))
 
+            print('word_tfidf:    {}'.format(word_tfidf))
             if word_tfidf != 0:
-                for idx, can_id in enumerate(vector_candidate):
-                    if can_id == word_id:
+                for idx, word2 in enumerate(candidate_words):
+                    if word == word2:
                         candidate_tfidf_weights[idx] = word_tfidf
 
         # scalar
         candidate_min_weight = np.min(candidate_tfidf_weights)
         candidate_max_weight = np.max(candidate_tfidf_weights)
-        candidate_tfidf_weights = (candidate_tfidf_weights - candidate_min_weight) / (candidate_max_weight - candidate_min_weight)
+        candidate_tfidf_weights = np.divide((candidate_tfidf_weights - candidate_min_weight),
+                                            (candidate_max_weight - candidate_min_weight) * 1.0)
 
         candidate_tfidf_weight_vector = np.zeros_like(candidate_tfidf_weights)
 
-        for id_can, weight in zip(vector_query, query_tfidf_weights):
+        for id_can, weight in zip(vector_query_ids, query_tfidf_weights):
             candidate_tfidf_weight_vector += pre_trained_embedding[id_can] * weight
 
         candidate_tfidf_weight_matrix.append(candidate_tfidf_weight_vector)
 
     query_tfidf_weight_vector = query_tfidf_weight_vector.reshape(1, -1)
-    candidate_tfidf_weight_matrix = np.array(candidate_tfidf_weight_matrix).reshape(len(candidate_replies), embedding_dim)
+    candidate_tfidf_weight_matrix = np.array(candidate_tfidf_weight_matrix).reshape(len(candidate_replies),
+                                                                                    embedding_dim)
 
     # To tensor
     query_tfidf_weight_vector = torch.Tensor(query_tfidf_weight_vector)
@@ -110,8 +113,8 @@ def get_tfidf_embedding_score(vocab, pre_trained_embedding, vector_query, input_
     cos = torch.nn.CosineSimilarity(dim=1, eps=1e-6)
     return cos(query_tfidf_weight_vector, candidate_tfidf_weight_matrix)
 
-def get_avg_embedding_score(pre_trained_embedding, vector_query, matrix_candidate):
 
+def get_avg_embedding_score(pre_trained_embedding, vector_query, matrix_candidate):
     avg_vector_query = np.mean(
         [pre_trained_embedding[id_query] for id_query in vector_query],
         axis=0
@@ -129,16 +132,16 @@ def get_avg_embedding_score(pre_trained_embedding, vector_query, matrix_candidat
     return cos(avg_vector_query, avg_matrix_candidate)
 
 
-
 '''
 Word Mover's Distance
 '''
-def get_wmd_score(vocab, pre_trained_embedding, vector_query, input_str, matrix_candidate, candidate_replies,  tfidf, stop_word_obj):
 
+
+def get_wmd_score(vocab, pre_trained_embedding, vector_query, input_str, matrix_candidate, candidate_replies, tfidf,
+                  stop_word_obj):
     from gensim.models import Word2Vec
     model = Word2Vec.load_word2vec_format()
 
     model.wv.wmdistance
 
     pass
-

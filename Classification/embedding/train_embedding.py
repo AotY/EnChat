@@ -79,7 +79,7 @@ if __name__ == '__main__':
         'size': opt.size,
         'window': opt.window,
         'min_count': opt.min_count,
-        'workers': max(1, multiprocessing.cpu_count() - 2),
+        'workers': max(1, multiprocessing.cpu_count() - 26),
         'sample': opt.sample,
         'alpha': opt.alpha,
         'hs': opt.hs,

@@ -209,7 +209,7 @@ while True:
 
 
     ############################# Re-Rank using a Word Embedding-based with TFIDF weight Ranker#############
-    tfidf_embedding_score = get_tfidf_embedding_score(vocab, pre_trained_embedding, vector_query, input_str, matrix_candidate, candidate_replies,  tfidf, stop_word_obj)
+    tfidf_embedding_score = get_tfidf_embedding_score(vocab, pre_trained_embedding, input_str, candidate_replies,  tfidf, stop_word_obj)
     tfidf_embedding_rank = np.argsort(tfidf_embedding_score)
     for idx, te_idx in enumerate(tfidf_embedding_rank[:10]):
         run_logger.info("TFIDF Embedding Ranker, c{}, {}, {}".format(idx, candidate_replies[te_idx], tfidf_embedding_score[te_idx]))
