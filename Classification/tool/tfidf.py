@@ -54,3 +54,13 @@ class TFIDF:
     def compute_tfidf(self, word, tf):
         tfidf_value = tf * np.log(self.text_count / self.idf_dict[word])
         return tfidf_value
+
+
+    def get_tfidf(self, word, default=0):
+        '''
+        Obtain word's idf value, in order to compute word's tfidf value.
+        :param word:
+        :param default:
+        :return:
+        '''
+        self.idf_dict.get(word, default)

@@ -132,8 +132,10 @@ def get_score(model, batch):
 
     print(outputs.size)
 
-    return F.sigmoid(outputs)
-    # return torch.
+    try:
+        return torch.sigmoid(outputs)
+    except AttributeError:
+        return F.sigmoid(outputs)
 
 
 ############################### Load model ####################################
