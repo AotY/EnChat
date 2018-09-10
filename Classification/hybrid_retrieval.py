@@ -231,5 +231,5 @@ while True:
     for idx, h_idx in enumerate(hybrid_embedding_rank[:10]):
         run_logger.info(
             "Hybrid Ranker, c{}, {}, {}".format(idx, candidate_replies[h_idx], tfidf_embedding_score[h_idx]))
-
+    index = random.sample(hybrid_embedding_rank[:10], 1)[0]
     print(">> \t{}\t{} :S5".format(candidate_replies[index], hybrid_score[index]))
