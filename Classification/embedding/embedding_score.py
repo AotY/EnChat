@@ -239,6 +239,7 @@ def get_avg_embedding_score(vocab, gensim_model, input_str, candidate_replies, s
 
     query_words_embedding = []
     for word in query_words:
+        print('query_word: ', word)
         try:
             word_embedding = gensim_model.wv[word]
         except KeyError:

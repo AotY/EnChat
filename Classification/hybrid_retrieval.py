@@ -51,7 +51,12 @@ runHandler.setLevel(logging.INFO)
 run_logger.addHandler(runHandler)
 
 ##################### configure ###############################################
-parser = argparse.ArgumentParser()
+# get optional parameters
+
+# parser = argparse.ArgumentParser()
+parser = argparse.ArgumentParser(description='hybrid_retrieval.py',
+                                     formatter_class=argparse.ArgumentDefaultsHelpFormatter)
+
 opts.model_opts(parser)
 opts.train_opts(parser)
 opts.test_opts(parser)
