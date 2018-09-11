@@ -26,7 +26,9 @@ def model_opts(parser):
                        help="""pre-trained vocab embedding, from word2vec, glove or gensim
                        """)
 
-    group.add_argument('-binary', action='binary mode for Loading or Saving embedding file.', help='binary model')
+    group.add_argument('-binary',
+                       action='binary_mode',
+                       help='binary model')
 
     group.add_argument('-embedding_ranker_type',
                        default='avg',
