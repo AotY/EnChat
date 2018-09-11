@@ -81,6 +81,8 @@ opt.numwords = len(vocab.word2idx)
 # Load gensim model
 print('Loading Gensim model.')
 gensim_model = KeyedVectors.load_word2vec_format(opt.pre_trained_vocab_embedding, binary=opt.binary)
+print ('vocab_size: {}'.format(len(gensim_model.vocab)))
+print ('word: clouds, embedding: {}'.format(gensim_model.wv['clouds']))
 
 # Load TFIDF object, for computing word's tfidf value.
 print('Loading tfidf object.')

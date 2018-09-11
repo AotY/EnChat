@@ -335,7 +335,7 @@ def get_extreme_embedding_score(vocab, gensim_model, input_str, candidate_replie
 Greedy:
 Greedily match words in two given utterances based on the cosine similarities of their embeddings, and to average the obtained scores
 '''
-def get_greedy_embedding_score(vocab, gensim_model, input_str, candidate_replies, stop_word_obj, lower=None):
+def get_greedy_embedding_score(gensim_model, input_str, candidate_replies, stop_word_obj, lower=None):
 
     query_words = stop_word_obj.remove_words(input_str.strip().replace('\t', ' '))
 
