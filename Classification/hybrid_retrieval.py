@@ -178,6 +178,10 @@ print("**************** start conversation [push Cntl-D to exit] *************")
 while True:
     input_str = raw_input("U: ")
 
+    input_str = input_str.rstrip()
+    if input_str == '':
+        continue
+
     # retrieve the ES
     candidates = _do_query_use_file_info(es, input_str)
 
@@ -185,7 +189,7 @@ while True:
     run_logger.info("Query: " + input_str)
     for idx, c in enumerate(candidates[:10]):
         run_logger.info(">>  ES, c{}, {}, {}".format(idx, c[1], c[0]))
-
+    run_logger.info("")
     # catch Exceptions
     if candidates is None or len(candidates) < 1:
         sys_output = (0., "Please input something else.")
@@ -210,7 +214,7 @@ while True:
 
     for idx, c_idx in enumerate(cnn_rank[:10]):
         run_logger.info(">>  CNN Ranker, c{}, {}, {}".format(idx, candidate_replies[c_idx], cnn_scores[c_idx]))
-    run_logger.info("\n")
+    run_logger.info("")
 
     index = random.sample(cnn_rank[:10], 1)[0]
     print(">> \t{}\t{} :S_cnn".format(candidate_replies[index], cnn_scores[index]))
@@ -228,7 +232,7 @@ while True:
     for idx, e_idx in enumerate(avg_embedding_rank[:10]):
         run_logger.info(
             ">>  Avg Embedding Ranker, c{}, {}, {}".format(idx, candidate_replies[e_idx], avg_embedding_score[e_idx]))
-    run_logger.info("\n")
+    run_logger.info("")
     index = random.sample(avg_embedding_rank[:10], 1)[0]
     print(">> \t{}\t{} :S_avg".format(candidate_replies[index], avg_embedding_score[index]))
 
