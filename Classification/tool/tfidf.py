@@ -73,4 +73,4 @@ class TFIDF:
         :param default:
         :return:
         '''
-        self.idf_dict.get(word, default)
+        return self.idf_dict.get(word, default)

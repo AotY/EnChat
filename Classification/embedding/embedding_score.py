@@ -225,7 +225,10 @@ def get_tfidf_embedding_score(vocab, gensim_model, tfidf, input_str, candidate_r
     return score_vector
 
 
-
+'''
+Average:
+An utterance representation can be obtained by averaging the embeddings of all the words in that utterance, of which the cosine similarity gives the Average metric
+'''
 def get_avg_embedding_score(vocab, gensim_model, input_str, candidate_replies, stop_word_obj, lower=None):
 
     query_words = stop_word_obj.remove_words(input_str.strip().replace('\t', ' '))
@@ -275,26 +278,105 @@ def get_avg_embedding_score(vocab, gensim_model, input_str, candidate_replies, s
 
     return score_vector
 
+'''
+Extreme:
+Achieve an utterance representation by taking the largest extreme values among the embedding vectors of all the words it contains
+'''
+def get_extreme_embedding_score(vocab, gensim_model, input_str, candidate_replies, stop_word_obj, lower=None):
+    query_words = stop_word_obj.remove_words(input_str.strip().replace('\t', ' '))
+    # to lower
+    if lower:
+        query_words = [word.lower() for word in query_words]
+
+    query_words_embedding = []
+    for word in query_words:
+        try:
+            word_embedding = gensim_model.wv[word]
+        except KeyError:
+            word_embedding = gensim_model.wv[vocab.unk]
+        query_words_embedding.append(word_embedding)
+
+    extreme_vector_query = np.array(query_words_embedding).max(axis=0)
+
+    extreme_matrix_candidate = []
+    for candidate_reply in candidate_replies:
+        candidate_words = stop_word_obj.remove_words(candidate_reply.strip().replace('\t', ' '))
+
+        # to lower
+        if lower:
+            candidate_words = [word.lower() for word in candidate_words]
+
+        candidate_words_embedding = []
+        for word in candidate_words:
+            try:
+                word_embedding = gensim_model.wv[word]
+            except KeyError:
+                word_embedding = gensim_model.wv[vocab.unk]
+
+            candidate_words_embedding.append(word_embedding)
+
+        extreme_vector_candidate = np.array(candidate_words_embedding).max(axis=0)
+        extreme_matrix_candidate.append(extreme_vector_candidate)
+
+    extreme_matrix_candidate = np.array(extreme_matrix_candidate)
+
+    score_vector = gensim_model.cosine_similarities(extreme_vector_query, extreme_matrix_candidate)
+
+    # normalization
+    max_score = np.max(score_vector)
+    min_score = np.min(score_vector)
+    score_vector = np.divide((score_vector - min_score), (max_score - min_score) * 1.0)
+
+    return score_vector
 
 '''
-def get_avg_embedding_score(pre_trained_embedding, vector_query, matrix_candidate):
-    avg_vector_query = np.mean(
-        [pre_trained_embedding[id_query] for id_query in vector_query],
-        axis=0
-    ).reshape(1, -1)
-
-    avg_matrix_candidate = np.array([
-        np.mean([pre_trained_embedding[id_candidate] for id_candidate in vector_candidate], axis=0)
-        for vector_candidate in matrix_candidate
-    ])
-
-    avg_vector_query = torch.Tensor(avg_vector_query)
-    avg_matrix_candidate = torch.Tensor(avg_matrix_candidate)
-
-    cos = torch.nn.CosineSimilarity(dim=1, eps=1e-6)
-    return cos(avg_vector_query, avg_matrix_candidate)
+Greedy:
+Greedily match words in two given utterances based on the cosine similarities of their embeddings, and to average the obtained scores
 '''
+def get_greedy_embedding_score(vocab, gensim_model, input_str, candidate_replies, stop_word_obj, lower=None):
 
+    query_words = stop_word_obj.remove_words(input_str.strip().replace('\t', ' '))
+
+    # to lower
+    if lower:
+        query_words = [word.lower() for word in query_words]
+
+    score_vector = []
+    for candidate_reply in candidate_replies:
+        candidate_words = stop_word_obj.remove_words(candidate_reply.strip().replace('\t', ' '))
+
+        # to lower
+        if lower:
+            candidate_words = [word.lower() for word in candidate_words]
+
+        max_scores = []
+        for query_word in query_words:
+            max_score = 0.0
+            for candidate_word in candidate_words:
+                try:
+                    score = gensim_model.wv.similarity(query_word, candidate_word)
+                except KeyError:
+                    score = -1.0
+
+                max_score = max(score, max_score)
+
+            max_scores.append(max_score)
+
+        score_vector.append(np.mean(max_scores))
+
+
+    # normalization
+    max_score = np.max(score_vector)
+    min_score = np.min(score_vector)
+    score_vector = np.divide((score_vector - min_score), (max_score - min_score) * 1.0)
+
+    return score_vector
+
+
+'''
+Optimal Matching
+TODO
+'''
 
 '''
 Word Mover's Distance
@@ -326,4 +408,25 @@ def get_wmd_embedding_score(gensim_model, input_str, candidate_replies, stop_wor
     score_vector = np.divide((score_vector - min_score), (max_score - min_score) * 1.0)
 
     return score_vector
+
+
+
+'''
+def get_avg_embedding_score(pre_trained_embedding, vector_query, matrix_candidate):
+    avg_vector_query = np.mean(
+        [pre_trained_embedding[id_query] for id_query in vector_query],
+        axis=0
+    ).reshape(1, -1)
+
+    avg_matrix_candidate = np.array([
+        np.mean([pre_trained_embedding[id_candidate] for id_candidate in vector_candidate], axis=0)
+        for vector_candidate in matrix_candidate
+    ])
+
+    avg_vector_query = torch.Tensor(avg_vector_query)
+    avg_matrix_candidate = torch.Tensor(avg_matrix_candidate)
+
+    cos = torch.nn.CosineSimilarity(dim=1, eps=1e-6)
+    return cos(avg_vector_query, avg_matrix_candidate)
+'''
 
