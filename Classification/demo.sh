@@ -23,7 +23,7 @@ python hybrid_retrieval.py \
     -model_from model/askqa/askqa_acc_84.07_ppl_0.35_e3.pt \
     -save_data data/reddit \
     -vocab_tfidf data/reddit/vocab.tfidf.pt \
-    -pre_trained_vocab_embedding data/reddit/vocab_word2vec.300d.npy \
+    -pre_trained_vocab_embedding data/reddit/vocab_word2vec.300d.txt \
     -binary False
     -lower \
 
