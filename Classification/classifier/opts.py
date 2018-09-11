@@ -27,7 +27,7 @@ def model_opts(parser):
                        """)
 
     group.add_argument('-binary',
-                       action='binary_mode',
+                       action='store_true',
                        help='binary model')
 
     group.add_argument('-embedding_ranker_type',
