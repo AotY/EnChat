@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
 python hybrid_retrieval.py \
-    -vocab_path data/reddit/vocab.pt \
     -word_vec_size 100 \
     -encoder_type cnn \
     -class_num 2 \
@@ -20,6 +19,7 @@ python hybrid_retrieval.py \
     -report_every 500 \
     -gpuid 5 \
     -seed 7 \
+    -vocab_path data/reddit/vocab_lower.pt \
     -model_from model/askqa/askqa_acc_84.07_ppl_0.35_e3.pt \
     -save_data data/reddit \
     -vocab_tfidf data/reddit/vocab.tfidf.pt \
