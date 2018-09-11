@@ -101,6 +101,8 @@ def preprocess_opts(parser):
                        help="""pre-trained word embedding file type, binary(True) or txt(False). 
                            """)
 
+    group.add_argument('-binary', action='binary mode for Loading or Saving embedding file.', help='binary model')
+
     group.add_argument('-pre_trained_vocab_embedding_file',
                        help="""pre trained vocab embedding file 
                            """)

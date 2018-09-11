@@ -148,8 +148,8 @@ def get_tfidf_embedding_score(vocab, gensim_model, tfidf, input_str, candidate_r
             word_embedding = gensim_model.wv[vocab.unk]
         query_words_embedding.append(word_embedding)
 
-        word_tfidf = (query_words_counter[word] / query_len) * (tfidf.idf_dict.get(word, 0.0))
-        print('query_word: {}, word_tfidf:    {}'.format(word, word_tfidf))
+        word_tfidf = (query_words_counter[word] / query_len * 1.0) * (tfidf.idf_dict.get(word, 0.0))
+        # print('query_word: {}, word_tfidf:    {}'.format(word, word_tfidf))
 
         query_tfidf_weights[idx] = word_tfidf
 
@@ -192,7 +192,7 @@ def get_tfidf_embedding_score(vocab, gensim_model, tfidf, input_str, candidate_r
             candidate_words_embedding.append(word_embedding)
 
             word_tfidf = (candidate_words_counter[word] / candidate_len) * (tfidf.idf_dict.get(word, 0.0))
-            print('candidate_word: {}, word_tfidf:    {}'.format(word, word_tfidf))
+            print('candidate_word: {}, tfidf:    {}'.format(word, word_tfidf))
 
             candidate_tfidf_weights[idx] = word_tfidf
 
@@ -239,14 +239,13 @@ def get_avg_embedding_score(vocab, gensim_model, input_str, candidate_replies, s
 
     query_words_embedding = []
     for word in query_words:
-        print('query_word: ', word)
         try:
             word_embedding = gensim_model.wv[word]
         except KeyError:
             word_embedding = gensim_model.wv[vocab.unk]
         query_words_embedding.append(word_embedding)
 
-        print('word: {}, word_embedding: {}'.format(word, word_embedding))
+        # print('word: {}, word_embedding: {}'.format(word, word_embedding))
     avg_vector_query = np.array(query_words_embedding).mean(axis=0)
 
     avg_matrix_candidate = []
@@ -335,7 +334,7 @@ def get_extreme_embedding_score(vocab, gensim_model, input_str, candidate_replie
 Greedy:
 Greedily match words in two given utterances based on the cosine similarities of their embeddings, and to average the obtained scores
 '''
-def get_greedy_embedding_score(gensim_model, input_str, candidate_replies, stop_word_obj, lower=None):
+def get_greedy_embedding_score(vocab, gensim_model, input_str, candidate_replies, stop_word_obj, lower=None):
 
     query_words = stop_word_obj.remove_words(input_str.strip().replace('\t', ' '))
 
@@ -410,7 +409,6 @@ def get_wmd_embedding_score(gensim_model, input_str, candidate_replies, stop_wor
     score_vector = np.divide((score_vector - min_score), (max_score - min_score) * 1.0)
 
     return score_vector
-
 
 
 '''

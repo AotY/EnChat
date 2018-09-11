@@ -3,7 +3,14 @@
   <component name="ChangeListManager">
     <list default="true" id="5c5e708b-1b0e-4b48-903e-1ed5e46b5a4f" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Classification/classifier/opts.py" afterPath="$PROJECT_DIR$/Classification/classifier/opts.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Classification/demo.sh" afterPath="$PROJECT_DIR$/Classification/demo.sh" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Classification/embedding/embedding_score.py" afterPath="$PROJECT_DIR$/Classification/embedding/embedding_score.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Classification/embedding/load_embedding.py" afterPath="$PROJECT_DIR$/Classification/embedding/load_embedding.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Classification/hybrid_retrieval.py" afterPath="$PROJECT_DIR$/Classification/hybrid_retrieval.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Classification/pre.s2s.sh" afterPath="$PROJECT_DIR$/Classification/pre.s2s.sh" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Classification/preprocess.py" afterPath="$PROJECT_DIR$/Classification/preprocess.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Classification/tool/preprocess_opt.py" afterPath="$PROJECT_DIR$/Classification/tool/preprocess_opt.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -23,8 +30,8 @@
       <file leaf-file-name="hybrid_retrieval.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Classification/hybrid_retrieval.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="603">
-              <caret line="82" column="90" lean-forward="false" selection-start-line="82" selection-start-column="90" selection-end-line="82" selection-end-column="90" />
+            <state relative-caret-position="336">
+              <caret line="263" column="29" lean-forward="false" selection-start-line="263" selection-start-column="29" selection-end-line="263" selection-end-column="29" />
               <folding>
                 <element signature="e#502#533#0" expanded="true" />
               </folding>
@@ -35,8 +42,8 @@
       <file leaf-file-name="chatting.2018-08-10.log" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/log/chatting.2018-08-10.log">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="238">
-              <caret line="26" column="50" lean-forward="true" selection-start-line="26" selection-start-column="50" selection-end-line="26" selection-end-column="50" />
+            <state relative-caret-position="312">
+              <caret line="16" column="52" lean-forward="true" selection-start-line="16" selection-start-column="52" selection-end-line="16" selection-end-column="52" />
               <folding />
             </state>
           </provider>
@@ -45,8 +52,8 @@
       <file leaf-file-name="demo.sh" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Classification/demo.sh">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="308">
-              <caret line="27" column="12" lean-forward="true" selection-start-line="27" selection-start-column="12" selection-end-line="27" selection-end-column="12" />
+            <state relative-caret-position="614">
+              <caret line="30" column="0" lean-forward="true" selection-start-line="30" selection-start-column="0" selection-end-line="30" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -55,12 +62,13 @@
       <file leaf-file-name="opts.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Classification/classifier/opts.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="190">
-              <caret line="30" column="30" lean-forward="false" selection-start-line="30" selection-start-column="23" selection-end-line="30" selection-end-column="30" />
+            <state relative-caret-position="270">
+              <caret line="28" column="31" lean-forward="false" selection-start-line="28" selection-start-column="25" selection-end-line="28" selection-end-column="31" />
               <folding>
-                <marker date="1536585277096" expanded="false" signature="15166:16371" ph="..." />
-                <marker date="1536585277096" expanded="false" signature="16374:16916" ph="..." />
-                <marker date="1536585277096" expanded="false" signature="16919:17400" ph="..." />
+                <element signature="e#0#31#0" expanded="true" />
+                <marker date="1536647144455" expanded="false" signature="15041:16246" ph="..." />
+                <marker date="1536647144455" expanded="false" signature="16249:16791" ph="..." />
+                <marker date="1536647144455" expanded="false" signature="16794:17275" ph="..." />
               </folding>
             </state>
           </provider>
@@ -69,8 +77,8 @@
       <file leaf-file-name="preprocess.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Classification/preprocess.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="272">
-              <caret line="191" column="19" lean-forward="false" selection-start-line="191" selection-start-column="4" selection-end-line="191" selection-end-column="19" />
+            <state relative-caret-position="243">
+              <caret line="146" column="48" lean-forward="true" selection-start-line="146" selection-start-column="48" selection-end-line="146" selection-end-column="48" />
               <folding>
                 <element signature="e#23#54#0" expanded="true" />
               </folding>
@@ -81,8 +89,8 @@
       <file leaf-file-name="pre.s2s.sh" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Classification/pre.s2s.sh">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="322">
-              <caret line="14" column="18" lean-forward="false" selection-start-line="14" selection-start-column="18" selection-end-line="14" selection-end-column="18" />
+            <state relative-caret-position="368">
+              <caret line="16" column="0" lean-forward="true" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -91,8 +99,8 @@
       <file leaf-file-name="embedding_score.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Classification/embedding/embedding_score.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="236">
-              <caret line="231" column="10" lean-forward="false" selection-start-line="231" selection-start-column="10" selection-end-line="231" selection-end-column="10" />
+            <state relative-caret-position="64">
+              <caret line="336" column="24" lean-forward="true" selection-start-line="336" selection-start-column="24" selection-end-line="336" selection-end-column="24" />
               <folding>
                 <element signature="e#24#55#0" expanded="true" />
               </folding>
@@ -103,22 +111,22 @@
       <file leaf-file-name="load_embedding.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Classification/embedding/load_embedding.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1058">
-              <caret line="62" column="46" lean-forward="false" selection-start-line="62" selection-start-column="33" selection-end-line="62" selection-end-column="46" />
+            <state relative-caret-position="434">
+              <caret line="141" column="37" lean-forward="true" selection-start-line="141" selection-start-column="37" selection-end-line="141" selection-end-column="37" />
               <folding>
                 <element signature="e#100#131#0" expanded="true" />
-                <marker date="1536645384619" expanded="true" signature="2128:3315" ph="..." />
-                <marker date="1536645384619" expanded="true" signature="3360:5250" ph="..." />
+                <marker date="1536647334454" expanded="true" signature="2242:3429" ph="..." />
+                <marker date="1536647334454" expanded="true" signature="3474:5463" ph="..." />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="vocab.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Classification/tool/vocab.py">
+      <file leaf-file-name="keyedvectors.py" pinned="false" current-in-tab="false">
+        <entry file="file://$USER_HOME$/anaconda2/lib/python2.7/site-packages/gensim/models/keyedvectors.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="343">
-              <caret line="43" column="35" lean-forward="true" selection-start-line="43" selection-start-column="35" selection-end-line="43" selection-end-column="35" />
+            <state relative-caret-position="269">
+              <caret line="1393" column="8" lean-forward="false" selection-start-line="1393" selection-start-column="8" selection-end-line="1393" selection-end-column="8" />
               <folding />
             </state>
           </provider>
@@ -135,13 +143,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>StopWord</find>
-      <find>word_id</find>
-      <find>get_tfidf_embedding_score</find>
-      <find>cnn_scores</find>
-      <find>iter</find>
-      <find>pre_trained_vocab_embedding_file</find>
-      <find>vocab_path</find>
       <find>with_label</find>
       <find>wv</find>
       <find>line_to_id</find>
@@ -161,10 +162,17 @@
       <find>vocab_size</find>
       <find>save_data</find>
       <find>lower</find>
-      <find>get_avg_embedding_score</find>
       <find>gensim_model</find>
       <find>word</find>
       <find>binary</find>
+      <find>bool</find>
+      <find>False</find>
+      <find>True</find>
+      <find>b</find>
+      <find>bina</find>
+      <find>vector_query</find>
+      <find>matrix_candidate</find>
+      <find>get_avg_embedding_score</find>
     </findStrings>
     <replaceStrings>
       <replace>candidate_reply</replace>
@@ -204,19 +212,19 @@
         <option value="$PROJECT_DIR$/Classification/tool/func_utils.py" />
         <option value="$PROJECT_DIR$/Classification/test_cls_dual.py" />
         <option value="$PROJECT_DIR$/Classification/train_cls_dual.py" />
-        <option value="$PROJECT_DIR$/Classification/tool/preprocess_opt.py" />
-        <option value="$PROJECT_DIR$/Classification/classifier/opts.py" />
         <option value="$PROJECT_DIR$/Classification/embedding/train_embedding.sh" />
         <option value="$PROJECT_DIR$/Classification/tool/tfidf.py" />
         <option value="$PROJECT_DIR$/README.md" />
         <option value="$PROJECT_DIR$/log/chatting.2018-08-10.log" />
         <option value="$PROJECT_DIR$/Classification/tool/vocab.py" />
+        <option value="$PROJECT_DIR$/Classification/tool/preprocess_opt.py" />
+        <option value="$PROJECT_DIR$/Classification/classifier/opts.py" />
         <option value="$PROJECT_DIR$/Classification/preprocess.py" />
-        <option value="$PROJECT_DIR$/Classification/pre.s2s.sh" />
         <option value="$PROJECT_DIR$/Classification/embedding/load_embedding.py" />
-        <option value="$PROJECT_DIR$/Classification/embedding/embedding_score.py" />
-        <option value="$PROJECT_DIR$/Classification/hybrid_retrieval.py" />
+        <option value="$PROJECT_DIR$/Classification/pre.s2s.sh" />
         <option value="$PROJECT_DIR$/Classification/demo.sh" />
+        <option value="$PROJECT_DIR$/Classification/hybrid_retrieval.py" />
+        <option value="$PROJECT_DIR$/Classification/embedding/embedding_score.py" />
       </list>
     </option>
   </component>
@@ -440,7 +448,7 @@
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32876712" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.12079701" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32876712" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32876712" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.1728838" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32876712" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -465,8 +473,8 @@
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32876712" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.12079701" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32876712" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.1728838" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32876712" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1728838" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32876712" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -497,14 +505,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="10465">
           <caret line="468" column="0" lean-forward="false" selection-start-line="468" selection-start-column="0" selection-end-line="468" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/anaconda2/lib/python2.7/argparse.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="226">
-          <caret line="650" column="6" lean-forward="false" selection-start-line="650" selection-start-column="6" selection-end-line="650" selection-end-column="6" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -690,14 +690,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Classification/stopwords_en.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="476">
-          <caret line="112" column="1" lean-forward="false" selection-start-line="112" selection-start-column="0" selection-end-line="112" selection-end-column="1" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Classification/tool/datasetbase.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="161">
@@ -758,14 +750,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Classification/tool/preprocess_opt.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="277">
-          <caret line="22" column="34" lean-forward="false" selection-start-line="22" selection-start-column="25" selection-end-line="22" selection-end-column="34" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Classification/tool/tfidf.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="453">
@@ -805,58 +789,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Classification/pre.s2s.sh">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="322">
-          <caret line="14" column="18" lean-forward="false" selection-start-line="14" selection-start-column="18" selection-end-line="14" selection-end-column="18" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Classification/tool/vocab.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="343">
           <caret line="43" column="35" lean-forward="true" selection-start-line="43" selection-start-column="35" selection-end-line="43" selection-end-column="35" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Classification/embedding/load_embedding.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1058">
-          <caret line="62" column="46" lean-forward="false" selection-start-line="62" selection-start-column="33" selection-end-line="62" selection-end-column="46" />
-          <folding>
-            <element signature="e#100#131#0" expanded="true" />
-            <marker date="1536645384619" expanded="true" signature="2128:3315" ph="..." />
-            <marker date="1536645384619" expanded="true" signature="3360:5250" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Classification/preprocess.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="191" column="19" lean-forward="false" selection-start-line="191" selection-start-column="4" selection-end-line="191" selection-end-column="19" />
-          <folding>
-            <element signature="e#23#54#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Classification/embedding/embedding_score.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="236">
-          <caret line="231" column="10" lean-forward="false" selection-start-line="231" selection-start-column="10" selection-end-line="231" selection-end-column="10" />
-          <folding>
-            <element signature="e#24#55#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/anaconda2/lib/python2.7/site-packages/gensim/models/keyedvectors.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="258">
-          <caret line="1476" column="21" lean-forward="false" selection-start-line="1476" selection-start-column="21" selection-end-line="1476" selection-end-column="21" />
           <folding />
         </state>
       </provider>
@@ -869,38 +805,111 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Classification/classifier/opts.py">
+    <entry file="file://$USER_HOME$/anaconda2/lib/python2.7/argparse.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="190">
-          <caret line="30" column="30" lean-forward="false" selection-start-line="30" selection-start-column="23" selection-end-line="30" selection-end-column="30" />
+        <state relative-caret-position="226">
+          <caret line="650" column="0" lean-forward="false" selection-start-line="650" selection-start-column="0" selection-end-line="651" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Classification/tool/preprocess_opt.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="402">
+          <caret line="103" column="114" lean-forward="true" selection-start-line="103" selection-start-column="4" selection-end-line="103" selection-end-column="114" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Classification/preprocess.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="243">
+          <caret line="146" column="48" lean-forward="true" selection-start-line="146" selection-start-column="48" selection-end-line="146" selection-end-column="48" />
           <folding>
-            <marker date="1536585277096" expanded="false" signature="15166:16371" ph="..." />
-            <marker date="1536585277096" expanded="false" signature="16374:16916" ph="..." />
-            <marker date="1536585277096" expanded="false" signature="16919:17400" ph="..." />
+            <element signature="e#23#54#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Classification/demo.sh">
+    <entry file="file://$PROJECT_DIR$/Classification/embedding/load_embedding.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="308">
-          <caret line="27" column="12" lean-forward="true" selection-start-line="27" selection-start-column="12" selection-end-line="27" selection-end-column="12" />
+        <state relative-caret-position="434">
+          <caret line="141" column="37" lean-forward="true" selection-start-line="141" selection-start-column="37" selection-end-line="141" selection-end-column="37" />
+          <folding>
+            <element signature="e#100#131#0" expanded="true" />
+            <marker date="1536647334454" expanded="true" signature="2242:3429" ph="..." />
+            <marker date="1536647334454" expanded="true" signature="3474:5463" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/anaconda2/lib/python2.7/site-packages/gensim/models/keyedvectors.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="269">
+          <caret line="1393" column="8" lean-forward="false" selection-start-line="1393" selection-start-column="8" selection-end-line="1393" selection-end-column="8" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Classification/classifier/opts.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="28" column="31" lean-forward="false" selection-start-line="28" selection-start-column="25" selection-end-line="28" selection-end-column="31" />
+          <folding>
+            <element signature="e#0#31#0" expanded="true" />
+            <marker date="1536647144455" expanded="false" signature="15041:16246" ph="..." />
+            <marker date="1536647144455" expanded="false" signature="16249:16791" ph="..." />
+            <marker date="1536647144455" expanded="false" signature="16794:17275" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Classification/pre.s2s.sh">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="368">
+          <caret line="16" column="0" lean-forward="true" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/log/chatting.2018-08-10.log">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="26" column="50" lean-forward="true" selection-start-line="26" selection-start-column="50" selection-end-line="26" selection-end-column="50" />
+        <state relative-caret-position="312">
+          <caret line="16" column="52" lean-forward="true" selection-start-line="16" selection-start-column="52" selection-end-line="16" selection-end-column="52" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Classification/stopwords_en.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="276">
+          <caret line="12" column="10" lean-forward="true" selection-start-line="12" selection-start-column="10" selection-end-line="12" selection-end-column="10" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Classification/demo.sh">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="614">
+          <caret line="30" column="0" lean-forward="true" selection-start-line="30" selection-start-column="0" selection-end-line="30" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Classification/embedding/embedding_score.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="64">
+          <caret line="336" column="24" lean-forward="true" selection-start-line="336" selection-start-column="24" selection-end-line="336" selection-end-column="24" />
+          <folding>
+            <element signature="e#24#55#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Classification/hybrid_retrieval.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="603">
-          <caret line="82" column="90" lean-forward="false" selection-start-line="82" selection-start-column="90" selection-end-line="82" selection-end-column="90" />
+        <state relative-caret-position="336">
+          <caret line="263" column="29" lean-forward="false" selection-start-line="263" selection-start-column="29" selection-end-line="263" selection-end-column="29" />
           <folding>
             <element signature="e#502#533#0" expanded="true" />
           </folding>

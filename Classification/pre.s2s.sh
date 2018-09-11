@@ -10,10 +10,10 @@ python preprocess.py \
     -pre_word_vecs_path /home/taoqing/Research/data/GoogleNews-vectors-negative300.bin \
     -pre_word_vecs_type word2vec \
     -pre_word_vecs_dim 300 \
-    -binary True \
     -pre_trained_vocab_embedding_file data/reddit/vocab_word2vec.300d.txt \
     -vocab_path data/reddit/vocab_lower.pt \
     -lower \
+#    -binary \
 
 #    -vocab_size 100000 \
 

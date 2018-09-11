@@ -82,7 +82,7 @@ opt.numwords = len(vocab.word2idx)
 print('Loading Gensim model.')
 gensim_model = KeyedVectors.load_word2vec_format(opt.pre_trained_vocab_embedding, binary=opt.binary)
 print ('vocab_size: {}'.format(len(gensim_model.vocab)))
-print ('word: clouds, embedding: {}'.format(gensim_model.wv['clouds']))
+# print ('word: clouds, embedding: {}'.format(gensim_model.wv['clouds']))
 
 # Load TFIDF object, for computing word's tfidf value.
 print('Loading tfidf object.')
@@ -213,11 +213,13 @@ while True:
     ############################# Re-Rank using a Word Embedding -based Ranker#############
     # pairs [[len_q, id_query, len_c, id_c]]
     # batch []
-    vector_query = pairs[0][1]
-    matrix_candidate = [pair[-1] for pair in pairs]
+    # vector_query = pairs[0][1]
+    # matrix_candidate = [pair[-1] for pair in pairs]
+
     avg_embedding_score = get_avg_embedding_score(vocab, gensim_model, input_str, candidate_replies, stop_word_obj, opt.lower)  # opt.embedding_ranker_type
     avg_embedding_rank = np.argsort(avg_embedding_score)
     avg_embedding_rank = avg_embedding_rank[::-1].tolist()
+
     for idx, e_idx in enumerate(avg_embedding_rank[:10]):
         run_logger.info(
             "Avg Embedding Ranker, c{}, {}, {}".format(idx, candidate_replies[e_idx], avg_embedding_score[e_idx]))
@@ -247,7 +249,7 @@ while True:
     print(">> \t{}\t{} :S_wmd".format(candidate_replies[index], wmd_embedding_score[index]))
 
     ############################# Re-Rank using a Word Embedding-based with Extreme Ranker#############
-    extreme_embedding_score = get_extreme_embedding_score(gensim_model, input_str, candidate_replies, stop_word_obj, opt.lower)
+    extreme_embedding_score = get_extreme_embedding_score(vocab, gensim_model, input_str, candidate_replies, stop_word_obj, opt.lower)
     extreme_embedding_rank = np.argsort(extreme_embedding_score)
     extreme_embedding_rank = extreme_embedding_rank[::-1].tolist()
 
@@ -259,7 +261,7 @@ while True:
 
 
     ############################# Re-Rank using a Word Embedding-based with Extreme Ranker#############
-    greedy_embedding_score = get_greedy_embedding_score(gensim_model, input_str, candidate_replies, stop_word_obj, opt.lower)
+    greedy_embedding_score = get_greedy_embedding_score(vocab, gensim_model, input_str, candidate_replies, stop_word_obj, opt.lower)
     greedy_embedding_rank = np.argsort(greedy_embedding_score)
     greedy_embedding_rank = greedy_embedding_rank[::-1].tolist()
 

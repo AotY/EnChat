@@ -32,11 +32,14 @@ def build_vocab_word2vec(vocab, vocab_size, vec_file, embedding_dim, binary, pre
     print("Load word2vec file: {} to gensim model. \n".format(vec_file))
 
     # fname, fvocab=None, binary=False, encoding='utf8'
-    word2vec_model = KeyedVectors.load_word2vec_format(fname=vec_file, binary=binary)
+    word2vec_model = KeyedVectors.load_word2vec_format(fname=vec_file, binary=True)
 
     out_of_vocab_count = 0
 
-    save_f = codecs.open(pre_trained_vocab_embedding_file, 'w', encoding='utf-8')
+    if binary:
+        save_f = codecs.open(pre_trained_vocab_embedding_file, 'w', encoding='utf-8')
+    else:
+        save_f = codecs.open(pre_trained_vocab_embedding_file, 'wb', encoding='utf-8')
 
     header = "%d %d\n" % (vocab_size, embedding_dim)
     # write header
@@ -136,11 +139,14 @@ def build_vocab_glove(vocab, vocab_size, glove_file, embedding_dim, binary,
     from gensim.scripts.glove2word2vec import glove2word2vec
     glove2word2vec(glove_file, tmp_file)
 
-    glove_model = KeyedVectors.load_word2vec_format(fname=glove_file, binary=binary)
+    glove_model = KeyedVectors.load_word2vec_format(fname=tmp_file)
 
     out_of_vocab_count = 0
 
-    save_f = codecs.open(pre_trained_vocab_embedding_file, 'w', encoding='utf-8')
+    if binary:
+        save_f = codecs.open(pre_trained_vocab_embedding_file, 'w', encoding='utf-8')
+    else:
+        save_f = codecs.open(pre_trained_vocab_embedding_file, 'wb', encoding='utf-8')
 
     header = "%d %d\n" % (vocab_size, embedding_dim)
     # write header
