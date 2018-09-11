@@ -44,9 +44,7 @@ def build_save_text_dataset_in_shards(vocab, corpus_list, opt, corpus_type):
             cur_pos = f_list[0].tell()
             if cur_pos >= last_pos + opt.max_shard_size:
                 last_pos = cur_pos
-                torch.save(
-                    DataSet(examples),
-                    '{}.{}.{}.pt'.format(opt.save_data, corpus_type, out_index))
+                torch.save(DataSet(examples), '{}.{}.{}.pt'.format(opt.save_data, corpus_type, out_index))
 
                 print('Saving {}.{}.{}.pt'.format(opt.save_data, corpus_type, out_index))
                 examples = []

@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
 python hybrid_retrieval.py \
-    -vocab_path data/reddit/askqa/vocab.pt \
+    -vocab_path data/reddit/vocab.pt \
     -word_vec_size 100 \
     -encoder_type cnn \
     -class_num 2 \
-    -data data/reddit/askqa \
+    -data data/reddit \
     -save_model model/askqa \
     -batch_size 256 \
     -optim adam \
@@ -21,9 +21,9 @@ python hybrid_retrieval.py \
     -gpuid 5 \
     -seed 7 \
     -model_from model/askqa/askqa_acc_84.07_ppl_0.35_e3.pt \
-    -save_data data/reddit/askqa \
-    -vocab_tfidf data/reddit/askqa/vocab.tfidf.pt \
-    -pre_trained_vocab_embedding data/reddit/askqa/vocab_word2vec.300d.npy \
+    -save_data data/reddit \
+    -vocab_tfidf data/reddit/vocab.tfidf.pt \
+    -pre_trained_vocab_embedding data/reddit/vocab_word2vec.300d.npy \
     -binary False
     -lower \
 
