@@ -126,7 +126,7 @@ def get_tfidf_embedding_score(vocab, pre_trained_embedding, input_str, candidate
     return cos(query_tfidf_weight_vector, candidate_tfidf_weight_matrix)
 '''
 
-def get_tfidf_embedding_score(vocab, gensim_model, tfidf, input_str, candidate_replies, stop_word_obj, lower=None):
+def get_tfidf_embedding_score(vocab, gensim_model, tfidf, input_str, candidate_replies, stop_word_obj, lower=None, normal=False):
 
     query_words = stop_word_obj.remove_words(input_str.strip().replace('\t', ' '))
     query_len = len(query_words)
@@ -218,9 +218,8 @@ def get_tfidf_embedding_score(vocab, gensim_model, tfidf, input_str, candidate_r
     score_vector = gensim_model.cosine_similarities(query_tfidf_weight_vector, tfidf_matrix_candidate)
 
     # normalization
-    max_score = np.max(score_vector)
-    min_score = np.min(score_vector)
-    score_vector = np.divide((score_vector - min_score), (max_score - min_score) * 1.0)
+    if normal:
+        score_vector = score_normalization(score_vector)
 
     return score_vector
 
@@ -229,7 +228,7 @@ def get_tfidf_embedding_score(vocab, gensim_model, tfidf, input_str, candidate_r
 Average:
 An utterance representation can be obtained by averaging the embeddings of all the words in that utterance, of which the cosine similarity gives the Average metric
 '''
-def get_avg_embedding_score(vocab, gensim_model, input_str, candidate_replies, stop_word_obj, lower=None):
+def get_avg_embedding_score(vocab, gensim_model, input_str, candidate_replies, stop_word_obj, lower=None, normal=False):
 
     query_words = stop_word_obj.remove_words(input_str.strip().replace('\t', ' '))
 
@@ -273,9 +272,8 @@ def get_avg_embedding_score(vocab, gensim_model, input_str, candidate_replies, s
     score_vector = gensim_model.cosine_similarities(avg_vector_query, avg_matrix_candidate)
 
     # normalization
-    # max_score = np.max(score_vector)
-    # min_score = np.min(score_vector)
-    # score_vector = np.divide((score_vector - min_score), (max_score - min_score) * 1.0)
+    if normal:
+        score_vector = score_normalization(score_vector)
 
     return score_vector
 
@@ -283,7 +281,7 @@ def get_avg_embedding_score(vocab, gensim_model, input_str, candidate_replies, s
 Extreme:
 Achieve an utterance representation by taking the largest extreme values among the embedding vectors of all the words it contains
 '''
-def get_extreme_embedding_score(vocab, gensim_model, input_str, candidate_replies, stop_word_obj, lower=None):
+def get_extreme_embedding_score(vocab, gensim_model, input_str, candidate_replies, stop_word_obj, lower=None, normal=False):
     query_words = stop_word_obj.remove_words(input_str.strip().replace('\t', ' '))
     # to lower
     if lower:
@@ -324,9 +322,8 @@ def get_extreme_embedding_score(vocab, gensim_model, input_str, candidate_replie
     score_vector = gensim_model.cosine_similarities(extreme_vector_query, extreme_matrix_candidate)
 
     # normalization
-    # max_score = np.max(score_vector)
-    # min_score = np.min(score_vector)
-    # score_vector = np.divide((score_vector - min_score), (max_score - min_score) * 1.0)
+    if normal:
+        score_vector = score_normalization(score_vector)
 
     return score_vector
 
@@ -334,7 +331,7 @@ def get_extreme_embedding_score(vocab, gensim_model, input_str, candidate_replie
 Greedy:
 Greedily match words in two given utterances based on the cosine similarities of their embeddings, and to average the obtained scores
 '''
-def get_greedy_embedding_score(vocab, gensim_model, input_str, candidate_replies, stop_word_obj, lower=None):
+def get_greedy_embedding_score(vocab, gensim_model, input_str, candidate_replies, stop_word_obj, lower=None, normal=False):
 
     query_words = stop_word_obj.remove_words(input_str.strip().replace('\t', ' '))
 
@@ -365,11 +362,9 @@ def get_greedy_embedding_score(vocab, gensim_model, input_str, candidate_replies
 
         score_vector.append(np.mean(max_scores))
 
-
     # normalization
-    # max_score = np.max(score_vector)
-    # min_score = np.min(score_vector)
-    # score_vector = np.divide((score_vector - min_score), (max_score - min_score) * 1.0)
+    if normal:
+        score_vector = score_normalization(score_vector)
 
     return score_vector
 
@@ -383,7 +378,7 @@ TODO
 Word Mover's Distance
 '''
 
-def get_wmd_embedding_score(gensim_model, input_str, candidate_replies, stop_word_obj, lower=None):
+def get_wmd_embedding_score(gensim_model, input_str, candidate_replies, stop_word_obj, lower=None, normal=False):
 
     distance_vector = np.random.rand(len(candidate_replies))
 
@@ -404,10 +399,18 @@ def get_wmd_embedding_score(gensim_model, input_str, candidate_replies, stop_wor
     score_vector = np.max(distance_vector) - distance_vector
 
     # normalization
-    # max_score = np.max(score_vector)
-    # min_score = np.min(score_vector)
-    # score_vector = np.divide((score_vector - min_score), (max_score - min_score) * 1.0)
+    if normal:
+        score_vector = score_normalization(score_vector)
 
+    return score_vector
+
+'''
+Max-Min normalization.
+'''
+def score_normalization(score_vector):
+    max_score = np.max(score_vector)
+    min_score = np.min(score_vector)
+    score_vector = np.divide((score_vector - min_score), (max_score - min_score) * 1.0)
     return score_vector
 
 
