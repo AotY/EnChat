@@ -192,7 +192,7 @@ def get_tfidf_embedding_score(vocab, gensim_model, tfidf, input_str, candidate_r
             candidate_words_embedding.append(word_embedding)
 
             word_tfidf = (candidate_words_counter[word] / candidate_len) * (tfidf.idf_dict.get(word, 0.0))
-            print('candidate_word: {}, tfidf:    {}'.format(word, word_tfidf))
+            # print('candidate_word: {}, tfidf:    {}'.format(word, word_tfidf))
 
             candidate_tfidf_weights[idx] = word_tfidf
 
