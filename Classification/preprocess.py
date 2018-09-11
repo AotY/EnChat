@@ -211,13 +211,13 @@ def main():
     print('reddit idf: {}'.format(tfidf.get_idf('reddit')))
 
     print("Building & saving training data...")
-    # build_save_dataset(vocab, 'train', opt)
-    #
-    # print("Building & saving validation data...")
-    # build_save_dataset(vocab, 'valid', opt)
-    #
-    # print("Building & saving test data...")
-    # build_save_dataset(vocab, 'test', opt)
+    build_save_dataset(vocab, 'train', opt)
+
+    print("Building & saving validation data...")
+    build_save_dataset(vocab, 'valid', opt)
+
+    print("Building & saving test data...")
+    build_save_dataset(vocab, 'test', opt)
 
 
 

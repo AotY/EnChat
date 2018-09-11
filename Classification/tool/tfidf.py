@@ -55,8 +55,11 @@ class TFIDF:
                     self.text_count += 1
 
         for word, word_text_count in word_text_dict.iteritems():
-            self.idf_dict[word] = np.log(self.text_count * 1.0 / word_text_count)
-            print('word: {}, idf: {}'.format(word, self.idf_dict[word]))
+            try:
+                self.idf_dict[word] = np.log(self.text_count * 1.0 / word_text_count)
+                # print('word: {}, idf: {}'.format(word, self.idf_dict[word]))
+            except UnicodeEncodeError:
+                continue
 
     # def compute_tfidf(self, word, tf):
     #     tfidf_value = tf * np.log(self.text_count / self.idf_dict[word])
