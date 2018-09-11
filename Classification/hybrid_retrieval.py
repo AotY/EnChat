@@ -74,12 +74,15 @@ opt.numwords = len(vocab.word2idx)
 # pre_trained_embedding = np.load(opt.pre_trained_vocab_embedding)
 
 # Load gensim model
+print('Loading Gensim model.')
 gensim_model = KeyedVectors.load_word2vec_format(opt.pre_trained_vocab_embedding, binary=opt.binary)
 
 # Load TFIDF object, for computing word's tfidf value.
+print('Loading tfidf object.')
 tfidf = torch.load(opt.vocab_tfidf)
 
 # Load stop_words
+print('Init stop words object.')
 stop_word_obj = StopWord(opt.stop_word_file)
 
 

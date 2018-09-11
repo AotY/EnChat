@@ -44,12 +44,16 @@ def build_vocab_word2vec(vocab, vocab_size, vec_file, embedding_dim, binary, pre
 
     for word in vocab.word2idx.keys():
         if word == vocab.pad:
+            print ('word: ', vocab.pad)
             word_embedding = pad_embedding
         elif word == vocab.sos:
+            print('word: ', vocab.sos)
             word_embedding = sos_embedding
         elif word == vocab.eos:
+            print('word: ', vocab.eos)
             word_embedding = eos_embedding
         elif word == vocab.unk:
+            print('word: ', vocab.unk)
             word_embedding = unk_embedding
         else:
             try:
@@ -58,7 +62,7 @@ def build_vocab_word2vec(vocab, vocab_size, vec_file, embedding_dim, binary, pre
                 out_of_vocab_count += 1
                 word_embedding = unk_embedding
 
-        vector_str = ' '.join([str(s) for s in word_embedding])
+        vector_str = ' '.join([ str(s) for s in word_embedding])
         save_f.write('%s %s\n' % (word, vector_str))
 
     save_f.close()

@@ -202,20 +202,20 @@ def main():
     print("Load pre-trained word embedding, and build embedding for vocab")
     build_vocab_embedding(vocab, opt)
 
-    print("build tf-idf for word")
-    tfidf = TFIDF()
-    tfidf.build_idf(stop_word_obj, opt)
-    torch.save(tfidf, opt.save_data + '/vocab.tfidf.pt')
-    print('reddit idf: {}'.format(tfidf.get_idf('reddit')))
-
-    print("Building & saving training data...")
-    build_save_dataset(vocab, 'train', opt)
-
-    print("Building & saving validation data...")
-    build_save_dataset(vocab, 'valid', opt)
-
-    print("Building & saving test data...")
-    build_save_dataset(vocab, 'test', opt)
+    # print("build tf-idf for word")
+    # tfidf = TFIDF()
+    # tfidf.build_idf(stop_word_obj, opt)
+    # torch.save(tfidf, opt.save_data + '/vocab.tfidf.pt')
+    # print('reddit idf: {}'.format(tfidf.get_idf('reddit')))
+    #
+    # print("Building & saving training data...")
+    # build_save_dataset(vocab, 'train', opt)
+    #
+    # print("Building & saving validation data...")
+    # build_save_dataset(vocab, 'valid', opt)
+    #
+    # print("Building & saving test data...")
+    # build_save_dataset(vocab, 'test', opt)
 
 
 

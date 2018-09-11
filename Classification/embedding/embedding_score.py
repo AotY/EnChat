@@ -245,6 +245,7 @@ def get_avg_embedding_score(vocab, gensim_model, input_str, candidate_replies, s
             word_embedding = gensim_model.wv[vocab.unk]
         query_words_embedding.append(word_embedding)
 
+        print('word: {}, word_embedding: {}'.format(word, word_embedding))
     avg_vector_query = np.array(query_words_embedding).mean(axis=0)
 
     avg_matrix_candidate = []
