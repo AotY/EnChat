@@ -273,9 +273,9 @@ def get_avg_embedding_score(vocab, gensim_model, input_str, candidate_replies, s
     score_vector = gensim_model.cosine_similarities(avg_vector_query, avg_matrix_candidate)
 
     # normalization
-    max_score = np.max(score_vector)
-    min_score = np.min(score_vector)
-    score_vector = np.divide((score_vector - min_score), (max_score - min_score) * 1.0)
+    # max_score = np.max(score_vector)
+    # min_score = np.min(score_vector)
+    # score_vector = np.divide((score_vector - min_score), (max_score - min_score) * 1.0)
 
     return score_vector
 
@@ -324,9 +324,9 @@ def get_extreme_embedding_score(vocab, gensim_model, input_str, candidate_replie
     score_vector = gensim_model.cosine_similarities(extreme_vector_query, extreme_matrix_candidate)
 
     # normalization
-    max_score = np.max(score_vector)
-    min_score = np.min(score_vector)
-    score_vector = np.divide((score_vector - min_score), (max_score - min_score) * 1.0)
+    # max_score = np.max(score_vector)
+    # min_score = np.min(score_vector)
+    # score_vector = np.divide((score_vector - min_score), (max_score - min_score) * 1.0)
 
     return score_vector
 
@@ -367,9 +367,9 @@ def get_greedy_embedding_score(vocab, gensim_model, input_str, candidate_replies
 
 
     # normalization
-    max_score = np.max(score_vector)
-    min_score = np.min(score_vector)
-    score_vector = np.divide((score_vector - min_score), (max_score - min_score) * 1.0)
+    # max_score = np.max(score_vector)
+    # min_score = np.min(score_vector)
+    # score_vector = np.divide((score_vector - min_score), (max_score - min_score) * 1.0)
 
     return score_vector
 
@@ -404,9 +404,9 @@ def get_wmd_embedding_score(gensim_model, input_str, candidate_replies, stop_wor
     score_vector = np.max(distance_vector) - distance_vector
 
     # normalization
-    max_score = np.max(score_vector)
-    min_score = np.min(score_vector)
-    score_vector = np.divide((score_vector - min_score), (max_score - min_score) * 1.0)
+    # max_score = np.max(score_vector)
+    # min_score = np.min(score_vector)
+    # score_vector = np.divide((score_vector - min_score), (max_score - min_score) * 1.0)
 
     return score_vector
 
