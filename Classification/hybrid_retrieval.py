@@ -184,7 +184,7 @@ while True:
     # logger
     run_logger.info("Query: " + input_str)
     for idx, c in enumerate(candidates[:10]):
-        run_logger.info("-- ES, c{}, {}, {}".format(idx, c[1], c[0]))
+        run_logger.info(">>  ES, c{}, {}, {}".format(idx, c[1], c[0]))
 
     # catch Exceptions
     if candidates is None or len(candidates) < 1:
@@ -209,7 +209,7 @@ while True:
     cnn_rank = cnn_rank[::-1].tolist()
 
     for idx, c_idx in enumerate(cnn_rank[:10]):
-        run_logger.info("-- CNN Ranker, c{}, {}, {}".format(idx, candidate_replies[c_idx], cnn_scores[c_idx]))
+        run_logger.info(">>  CNN Ranker, c{}, {}, {}".format(idx, candidate_replies[c_idx], cnn_scores[c_idx]))
     run_logger.info("\n")
 
     index = random.sample(cnn_rank[:10], 1)[0]
@@ -227,7 +227,7 @@ while True:
 
     for idx, e_idx in enumerate(avg_embedding_rank[:10]):
         run_logger.info(
-            "-- Avg Embedding Ranker, c{}, {}, {}".format(idx, candidate_replies[e_idx], avg_embedding_score[e_idx]))
+            ">>  Avg Embedding Ranker, c{}, {}, {}".format(idx, candidate_replies[e_idx], avg_embedding_score[e_idx]))
     run_logger.info("\n")
     index = random.sample(avg_embedding_rank[:10], 1)[0]
     print(">> \t{}\t{} :S_avg".format(candidate_replies[index], avg_embedding_score[index]))
@@ -238,7 +238,7 @@ while True:
     tfidf_embedding_rank = tfidf_embedding_rank[::-1].tolist()
     for idx, te_idx in enumerate(tfidf_embedding_rank[:10]):
         run_logger.info(
-            "-- TFIDF Embedding Ranker, c{}, {}, {}".format(idx, candidate_replies[te_idx], tfidf_embedding_score[te_idx]))
+            ">>  TFIDF Embedding Ranker, c{}, {}, {}".format(idx, candidate_replies[te_idx], tfidf_embedding_score[te_idx]))
     run_logger.info("")
     index = random.sample(tfidf_embedding_rank[:10], 1)[0]
     print(">> \t{}\t{} :S_tfidf".format(candidate_replies[index], tfidf_embedding_score[index]))
@@ -251,8 +251,8 @@ while True:
 
     for idx, w_idx in enumerate(wmd_embedding_rank[:10]):
         run_logger.info(
-            "-- WMD Embedding Ranker, c{}, {}, {}".format(idx, candidate_replies[w_idx], wmd_embedding_score[w_idx]))
-        run_logger.info("")
+            ">>  WMD Embedding Ranker, c{}, {}, {}".format(idx, candidate_replies[w_idx], wmd_embedding_score[w_idx]))
+    run_logger.info("")
     index = random.sample(wmd_embedding_rank[:10], 1)[0]
     print(">> \t{}\t{} :S_wmd".format(candidate_replies[index], wmd_embedding_score[index]))
 
@@ -263,7 +263,7 @@ while True:
 
     for idx, e_idx in enumerate(extreme_embedding_rank[:10]):
         run_logger.info(
-            "-- Extreme Embedding Ranker, c{}, {}, {}".format(idx, candidate_replies[e_idx], extreme_embedding_score[e_idx]))
+            ">>  Extreme Embedding Ranker, c{}, {}, {}".format(idx, candidate_replies[e_idx], extreme_embedding_score[e_idx]))
     run_logger.info("")
     index = random.sample(extreme_embedding_rank[:10], 1)[0]
     print(">> \t{}\t{} :S_extreme".format(candidate_replies[index], extreme_embedding_score[index]))
@@ -276,7 +276,7 @@ while True:
 
     for idx, e_idx in enumerate(greedy_embedding_rank[:10]):
         run_logger.info(
-            "-- Greedy Embedding Ranker, c{}, {}, {}".format(idx, candidate_replies[e_idx], greedy_embedding_score[e_idx]))
+            ">>  Greedy Embedding Ranker, c{}, {}, {}".format(idx, candidate_replies[e_idx], greedy_embedding_score[e_idx]))
     run_logger.info("")
     index = random.sample(greedy_embedding_rank[:10], 1)[0]
     print(">> \t{}\t{} :S_greedy".format(candidate_replies[index], greedy_embedding_score[index]))
@@ -300,7 +300,7 @@ while True:
     hybrid_embedding_rank = hybrid_embedding_rank[::-1].tolist()
     for idx, h_idx in enumerate(hybrid_embedding_rank[:10]):
         run_logger.info(
-            "-- Hybrid Ranker, c{}, {}, {}".format(idx, candidate_replies[h_idx], hybrid_score[h_idx]))
+            ">>  Hybrid Ranker, c{}, {}, {}".format(idx, candidate_replies[h_idx], hybrid_score[h_idx]))
     run_logger.info("")
     index = random.sample(hybrid_embedding_rank[:10], 1)[0]
     print(">> \t{}\t{} :S_hybrid".format(candidate_replies[index], hybrid_score[index]))
